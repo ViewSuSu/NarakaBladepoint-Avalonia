@@ -19,9 +19,10 @@
 
 ## 关于这个项目
 
--  在 [WPF 版本](https://github.com/ViewSuSu/NarakaBladepoint-WPF) 基础上，用 Avalonia 重写的跨平台版本，支持 Windows、macOS、Linux
+-  玩了2000个小时的永劫了，最近才发现它整个客户端UX/UI设计得非常优雅（大厂的产品经理还是牛逼），于是先用 WPF 还原了一遍，现在用 Avalonia 做了跨平台版本，支持 Windows、macOS、Linux —— 参见 [WPF 版本](https://github.com/ViewSuSu/NarakaBladepoint-WPF)
 -  .NET 8、Prism、Avalonia 11.1.0、所有自定义控件纯手撸、没用第三方 UI 库
 -  经过精心设计，严格遵循 MVVM 模式，符合 Avalonia 工程规范，代码结构优雅
+-  后来发现了 VibeCoding，批量生成代码真的很爽，项目一半手写一半 AI 辅助
 
 <div align="center">
   <img src="./docs/MainWindows.png" alt="主窗口" width="100%" />

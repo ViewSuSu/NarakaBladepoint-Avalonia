@@ -19,9 +19,11 @@
 
 ## About This Project
 
-- **Origin** - Cross-platform rewrite of the [WPF version](https://github.com/ViewSuSu/NarakaBladepoint-WPF) using Avalonia, supporting Windows, macOS, and Linux
+- **Motivation** - Played 2000+ hours of Naraka Bladepoint and recently realized how brilliantly designed the client's UX/UI is (props to the big-name product managers!), so I first recreated it with WPF, then rewrote it in Avalonia to support Windows, macOS, and Linux — see the [WPF version](https://github.com/ViewSuSu/NarakaBladepoint-WPF)
 - **Tech Stack** - .NET 8, Prism, Avalonia 11.1.0, all custom controls, no third-party UI libs
 - **Architecture** - Meticulously designed, following strict MVVM patterns and Avalonia best practices, elegant code structure
+- **AI** - Later discovered VibeCoding was amazing for bulk code generation - total game changer!
+- **Code Quality** - Project is half human, half AI-assisted
 
 <div align="center">
   <img src="./docs/MainWindows.png" alt="主窗口" width="100%" />
