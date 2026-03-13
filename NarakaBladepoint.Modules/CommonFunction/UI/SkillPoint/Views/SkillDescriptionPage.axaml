@@ -1,0 +1,120 @@
+﻿<UserControl
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.SkillPoint.Views.SkillDescriptionPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.SkillPoint.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="{Binding DescriptionHeight, RelativeSource={RelativeSource AncestorType=local:SkillDescriptionPage}}" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <!--  Title Row  -->
+        <TextBlock
+            Grid.Row="0"
+            Padding="10"
+            VerticalAlignment="Center"
+            FontSize="25"
+            Foreground="#FFD4A574"
+            Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:SkillDescriptionPage}}" />
+
+        <!--  Tags Row  -->
+        <ItemsControl
+            Grid.Row="1"
+            Padding="10,5"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding Tags, RelativeSource={RelativeSource AncestorType=local:SkillDescriptionPage}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Width="{Binding TagWidth, RelativeSource={RelativeSource AncestorType=local:SkillDescriptionPage}}"
+                        Height="{Binding TagHeight, RelativeSource={RelativeSource AncestorType=local:SkillDescriptionPage}}"
+                        Margin="5,0"
+                        Padding="8,3">
+                        <Border.Background>
+                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                        </Border.Background>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            Foreground="#FFFFFF"
+                            Text="{Binding}" />
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--  Description Row  -->
+        <ScrollViewer
+            Grid.Row="2"
+            HorizontalScrollBarVisibility="Hidden"
+            VerticalScrollBarVisibility="Auto">
+            <ContentControl
+                Name="description"
+                Padding="10"
+                VerticalAlignment="Top"
+                Content="{Binding Description, RelativeSource={RelativeSource AncestorType=local:SkillDescriptionPage}}" />
+        </ScrollViewer>
+
+        <!--  Video Row  -->
+        <controls:HighlightBorder
+            Grid.Row="3"
+            Margin="10"
+            Background="Black"
+            EnableMaskOnHover="True">
+            <Grid>
+                <!-- MediaElement not available in Avalonia - video playback placeholder -->
+                <Border Name="VideoPlayer" Background="Black" />
+
+                <!--  Play/Pause Control Button  -->
+                <Button
+                    Name="PlayPauseButton"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="PlayPauseButton_Click"
+                    Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent">
+                                <!--  灰色圆形背景  -->
+                                <Ellipse
+                                    Width="40"
+                                    Height="40"
+                                    Fill="{StaticResource DefaultTransientBlackBackground5}"
+                                    Opacity="0.7" />
+
+                                <!--  白色播放三角形或暂停符号  -->
+                                <Path
+                                    Name="PlaySymbol"
+                                    Width="18"
+                                    Height="18"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Data="M 5,2 L 30,17.5 L 5,33 Z"
+                                    Fill="White"
+                                    Stretch="Uniform" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </controls:HighlightBorder>
+    </Grid>
+</UserControl>

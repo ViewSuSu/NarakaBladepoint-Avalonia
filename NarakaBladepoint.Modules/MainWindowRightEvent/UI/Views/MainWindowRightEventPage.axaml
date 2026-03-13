@@ -1,0 +1,48 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.MainWindowRightEvent.UI.Views.MainWindowRightEventPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.MainWindowRightEvent.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.MainWindowRightEvent.UI.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="200"
+    mc:Ignorable="d">
+    <UniformGrid Columns="2" Rows="4">
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventOneCommand}"
+            Icon="{StaticResource ButtonLuHuaJiShiImage}"
+            Text="露华集市" />
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventTwoCommand}"
+            Icon="{StaticResource ButtonBaiZeBaiKeImage}"
+            Text="白泽百科" />
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventThreeCommand}"
+            Icon="{StaticResource ButtonSaiShiImage}"
+            Text="赛事" />
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventFourCommand}"
+            Icon="{StaticResource ButtonTuoZhanBaoImage}"
+            Text="拓展包 "/>
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventFiveCommand}"
+            Icon="{StaticResource ButtonZhaoDuiYouImage}"
+            Text="找队友 "/>
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventSixCommand}"
+            Icon="{StaticResource ButtonZhaiXingGeImage}"
+            Text="摘星阁 "/>
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventSevenCommand}"
+            Icon="{StaticResource ButtonRuJieMenImage}"
+            Text="入劫门 "/>
+        <controls:IconTextBlockCustomControl
+            Command="{Binding EventEightCommand}"
+            Icon="{StaticResource ButtonBaiZeYueKaImage}"
+            Text="白泽月卡" />
+    </UniformGrid>
+</bases:UserControlBase>

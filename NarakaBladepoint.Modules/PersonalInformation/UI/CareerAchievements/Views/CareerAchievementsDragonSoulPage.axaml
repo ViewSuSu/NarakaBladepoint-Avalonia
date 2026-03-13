@@ -1,0 +1,37 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.CareerAchievements.Views.CareerAchievementsDragonSoulPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.CareerAchievements.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Margin="60,100,60,60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Image Source="{StaticResource PersonalInfoDetailsAchievementsImages3_1Image}" />
+        <UniformGrid
+            Grid.Row="1"
+            VerticalAlignment="Top"
+            Columns="4">
+            <controls:HighlightBorder Margin="5,10,5,0" EnableMaskOnHover="True">
+                <Image Source="{StaticResource PersonalInfoDetailsAchievementsImages3_2Image}" />
+            </controls:HighlightBorder>
+            <controls:HighlightBorder Margin="5,10,5,0" EnableMaskOnHover="True">
+                <Image Source="{StaticResource PersonalInfoDetailsAchievementsImages3_3Image}" />
+            </controls:HighlightBorder>
+            <controls:HighlightBorder Margin="5,10,5,0" EnableMaskOnHover="True">
+                <Image Source="{StaticResource PersonalInfoDetailsAchievementsImages3_4Image}" />
+            </controls:HighlightBorder>
+            <controls:HighlightBorder Margin="5,10,5,0" EnableMaskOnHover="True">
+                <Image Source="{StaticResource PersonalInfoDetailsAchievementsImages3_5Image}" />
+            </controls:HighlightBorder>
+        </UniformGrid>
+    </Grid>
+</views:UserControlBase>

@@ -1,0 +1,187 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformationDetailMainContent.Views.PersonalInformationDetailMainContentPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attached="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:avatarFramePage="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.AvatarFrame.Views"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:careerAchievementsPage="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.CareerAchievements.Views"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:core="clr-namespace:Microsoft.Xaml.Behaviors.Core;assembly=Microsoft.Xaml.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:heroData="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.HeroData.Views"
+    xmlns:historyMatchRecord="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.HistoryMatchRecord.Views"
+    xmlns:illustratedCollectionPage="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.IllustratedCollection.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:personalInformationDetailsPage="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformationDetails.Views"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:seasonData="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.SeasonData.Views"
+    xmlns:socialAvatarPage="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.SocialAvatar.Views"
+    xmlns:tippingRecordPage="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.TippingRecord.Views"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformationDetailMainContent.ViewModels"
+    xmlns:wealth="clr-namespace:NarakaBladepoint.Modules.Wealth.UI.Main.Views"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid
+            x:Name="topGrid"
+            Grid.Row="0"
+            VerticalAlignment="Top"
+            ZIndex="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid
+                    Height="50"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource DefaultTransientBlackBackground2}" />
+                <Grid Margin="50,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        FontSize="25"
+                        Foreground="White"
+                        Text="名片" />
+                    <TabControl
+                        Name="mainTabControl"
+                        Grid.Column="1"
+                        attached:TabControlContentMarginAttachedProperty.IsAutoAdjustContentMargin="True"
+                        Background="Transparent"
+                        BorderThickness="0">
+                        
+                        <TabItem
+                            Name="tab1"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="个人信息"
+                            IsSelected="True" />
+                        <TabItem
+                            Name="tab2"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="英雄数据" />
+                        <TabItem
+                            Name="tab3"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="赛季数据" />
+                        <TabItem
+                            Name="tab4"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="历史战绩" />
+                        <TabItem
+                            Name="tab5"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="打赏记录" />
+                        <TabItem
+                            Name="tab6"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="社交头像" />
+                        <!--<TabItem
+    VerticalAlignment="Center"
+    Background="Transparent"
+    Header="头像框">
+    <avatarFramePage:AvatarFramePage />
+</TabItem>-->
+                        <TabItem
+                            Name="tab7"
+                            Header="生涯成就">
+                            <TabControl
+                                Margin="0,45,0,0"
+                                Background="Transparent"
+                                BorderThickness="0">
+                                <TabItem
+                                    Width="310"
+                                    Height="25"
+                                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                                    Header=""
+                                    IsVisible="False" />
+                                <TabItem
+                                    Name="tabItem1"
+                                    Width="80"
+                                    Height="25"
+                                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                                    Header="英雄印"
+                                    IsSelected="True" />
+                                <TabItem
+                                    Name="tabItem2"
+                                    Width="80"
+                                    Height="25"
+                                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                                    Header="龙魂宝藏" />
+                                <TabItem
+                                    Name="tabItem3"
+                                    Width="80"
+                                    Height="25"
+                                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                                    Header="金乌宝藏" />
+                            </TabControl>
+                        </TabItem>
+                        <TabItem
+                            Name="tab8"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="图鉴收集">
+                            <TabControl
+                                Margin="0,45,0,0"
+                                Background="Transparent"
+                                BorderThickness="0">
+                                <TabItem
+                                    Width="400"
+                                    Height="25"
+                                    Header=""
+                                    IsVisible="False" />
+                                <TabItem
+                                    Name="tabItemA"
+                                    Width="80"
+                                    Height="25"
+                                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                                    Header="总览"
+                                    IsSelected="True" />
+                                <TabItem
+                                    Name="tabItemB"
+                                    Width="80"
+                                    Height="25"
+                                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                                    Header="套装" />
+                            </TabControl>
+                        </TabItem>
+                        <TabItem
+                            Width="400"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Header="信誉分"
+                            IsVisible="False" />
+
+                    </TabControl>
+                    <wealth:WealthPage
+                        Grid.Column="1"
+                        Width="140"
+                        Margin="0,0,80,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <ContentControl Name="mainContentControl">
+        </ContentControl>
+
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnCommand}" />
+    </Grid>
+</bases:UserControlBase>
+
+

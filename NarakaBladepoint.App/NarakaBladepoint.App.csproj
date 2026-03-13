@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Company>小窗同学</Company>
+		<Authors>小窗同学</Authors>
+		<NoWarn>$(NoWarn);CS8601;CS8603;CS8618</NoWarn>
+		<LangVersion>latest</LangVersion>
+		<Version>1.0.0</Version>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia.Desktop" Version="11.1.0" />
+		<PackageReference Include="Avalonia.Diagnostics" Version="11.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\NarakaBladepoint.Modules\NarakaBladepoint.Modules.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,658 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.SocialTag.UI.Views.SocialTagPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:converters="clr-namespace:NarakaBladepoint.Framework.UI.Converters;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tagConverters="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.Converters"
+    xmlns:tagUsercontrol="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.Views"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:OutRangeMaskVisibilityConverter x:Key="OutRangeMaskVisibilityConverter" />
+        <converters:OutRangeEnableConverter x:Key="OutRangeEnableConverter" />
+        <tagConverters:WidthSubtractConverter x:Key="WidthSubtractConverter" />
+    </UserControl.Resources>
+    <Grid Background="{StaticResource Background2}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition />
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Margin="20,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="30"
+                Foreground="White"
+                Text="社交标签" />
+            <Grid Grid.Row="1" Margin="50,70,50,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition />
+                    <RowDefinition Height="0.1*" />
+                </Grid.RowDefinitions>
+                <Border Background="#2A000000">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="80"
+                            HorizontalAlignment="Left"
+                            Source="{Binding CurrentUserModel.Avatar, Mode=OneWay}" />
+                        <UniformGrid Grid.Column="1" Rows="2">
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontSize="20"
+                                Foreground="White"
+                                Text="{Binding CurrentUserModel.Name, Mode=OneWay}" />
+                            <tagUsercontrol:TagUserControl />
+                        </UniformGrid>
+                    </Grid>
+                </Border>
+                <Grid
+                    Grid.Row="1"
+                    Margin="0,10,0,0"
+                    Background="#2A000000">
+                    <Grid Margin="20,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="0.4*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="White"
+                                Text="在线时间： "/>
+                            <ItemsControl
+                                Grid.Column="1"
+                                ItemsSource="{Binding SocialTagOnlineModels, Mode=OneWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid
+                                            Margin="5"
+                                            Columns="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SocialTagOnlineModels.Count, Mode=OneWay}"
+                                            Rows="1" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox
+                                            VerticalAlignment="Center"
+                                            Content="{Binding SocialTagOnlineData.Text, Mode=OneWay}"
+                                            FontSize="15"
+                                            Foreground="White"
+                                            IsChecked="{Binding IsSelected}">
+                                            <i:Interaction.Behaviors>
+                                                <ia:EventTriggerBehavior EventName="IsCheckedChanged">
+                                                    <ia:InvokeCommandAction Command="{Binding $parent[UserControl].DataContext.CheckOnlineCommand}" CommandParameter="{Binding}" />
+                                                </ia:EventTriggerBehavior>
+                                            </i:Interaction.Behaviors>
+                                        </CheckBox>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <!--<UniformGrid Grid.Column="1" Columns="6">
+                                <CheckBox
+                                    x:Name="DaytimeOnlineCheckBox"
+                                    VerticalAlignment="Center"
+                                    Checked="DaytimeOnlineCheckBox_Checked"
+                                    Content="白天在线"
+                                    FontSize="15"
+                                    Foreground="White" />
+
+                                <CheckBox
+                                    x:Name="NightOnlineCheckBox"
+                                    VerticalAlignment="Center"
+                                    Checked="NightOnlineCheckBox_Checked"
+                                    Content="晚上在线"
+                                    FontSize="15"
+                                    Foreground="White" />
+
+                                <CheckBox
+                                    x:Name="AllDayOnlineCheckBox"
+                                    VerticalAlignment="Center"
+                                    Checked="AllDayOnlineCheckBox_Checked"
+                                    Content="全天在线"
+                                    FontSize="15"
+                                    Foreground="White" />
+
+                                <CheckBox
+                                    x:Name="WeekendOnlineCheckBox"
+                                    VerticalAlignment="Center"
+                                    Checked="WeekendOnlineCheckBox_Checked"
+                                    Content="周末在线"
+                                    FontSize="15"
+                                    Foreground="White" />
+
+                                <CheckBox
+                                    x:Name="CasualOnlineCheckBox"
+                                    VerticalAlignment="Center"
+                                    Checked="CasualOnlineCheckBox_Checked"
+                                    Content="随缘在线"
+                                    FontSize="15"
+                                    Foreground="White" />
+                            </UniformGrid>-->
+
+                            <UniformGrid
+                                Grid.Column="2"
+                                Margin="5"
+                                Columns="2">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Foreground="White"
+                                    Text="麦克风：" />
+                                <ItemsControl ItemsSource="{Binding SocialTagMicModels, Mode=OneWay}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid
+                                                Margin="5"
+                                                Columns="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SocialTagMicModels.Count, Mode=OneWay}"
+                                                Rows="1" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox
+                                                VerticalAlignment="Center"
+                                                Content="{Binding SocialTagMicData.Text, Mode=OneWay}"
+                                                FontSize="15"
+                                                Foreground="White"
+                                                IsChecked="{Binding IsSelected}">
+                                                <i:Interaction.Behaviors>
+                                                    <ia:EventTriggerBehavior EventName="IsCheckedChanged">
+                                                        <ia:InvokeCommandAction Command="{Binding $parent[UserControl].DataContext.CheckSocialTagMicCommand}" CommandParameter="{Binding}" />
+                                                    </ia:EventTriggerBehavior>
+                                                </i:Interaction.Behaviors>
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </UniformGrid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TabControl
+                                Name="tabControl"
+                                Background="Transparent"
+                                TabStripPlacement="Left">
+                                <controls:ImageTextTabItem
+                                    Name="tabItem1"
+                                    Width="120"
+                                    Height="40"
+                                    Background="#1A000000"
+                                    ImageSource="{StaticResource SocialTagTabItemIcon1Image}"
+                                    IsMouseOverHilightBoder="True"
+                                    IsSelectedHilgihtBoder="True"
+                                    SelectedBackground="#1A000000"
+                                    Text="战斗">
+                                    <Grid Margin="10,0,0,10">
+                                        <Grid.Width>
+                                            <MultiBinding Converter="{StaticResource WidthSubtractConverter}">
+                                                <Binding Path="Bounds.Width" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                                <Binding ElementName="tabItem1" Path="Bounds.Width" />
+                                            </MultiBinding>
+                                        </Grid.Width>
+                                        <Grid.Height>
+                                            <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                        </Grid.Height>
+                                        <ItemsControl ItemsSource="{Binding FightTags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid
+                                                        Margin="5"
+                                                        Columns="5"
+                                                        Rows="7" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="2">
+                                                        <Border.Background>
+                                                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                        <Grid>
+                                                            <Rectangle
+                                                                ZIndex="1"
+                                                                Fill="#E6000000"
+                                                                Opacity="0.5">
+                                                                <Rectangle.IsVisible>
+                                                                    <MultiBinding Converter="{StaticResource OutRangeMaskVisibilityConverter}">
+                                                                        <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                        <Binding Path="IsSelected" />
+                                                                        <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                                    </MultiBinding>
+                                                                </Rectangle.IsVisible>
+                                                            </Rectangle>
+                                                            <Grid>
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Foreground="White"
+                                                                    Text="{Binding SocialTagData.Text, Mode=OneWay}" />
+                                                                <Canvas
+                                                                    Width="20"
+                                                                    Height="20"
+                                                                    HorizontalAlignment="Right"
+                                                                    IsVisible="{Binding IsSelected, Mode=OneWay}">
+                                                                    <Path
+                                                                        x:Name="checkedPath"
+                                                                        Data="M6,9 L9,12 14,7"
+                                                                        Opacity="5"
+                                                                        Stroke="#EAB181"
+                                                                        StrokeJoin="Round"
+                                                                        StrokeLineCap="Round"
+                                                                        StrokeThickness="2" />
+                                                                </Canvas>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Border.IsEnabled>
+                                                            <MultiBinding Converter="{StaticResource OutRangeEnableConverter}">
+                                                                <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                <Binding Path="IsSelected" />
+                                                                <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            </MultiBinding>
+                                                        </Border.IsEnabled>
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.MouseLeftButtonDown}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </controls:ImageTextTabItem>
+                                <controls:ImageTextTabItem
+                                    Height="40"
+                                    Background="#1A000000"
+                                    ImageSource="{StaticResource SocialTagTabItemIcon2Image}"
+                                    IsMouseOverHilightBoder="True"
+                                    IsSelectedHilgihtBoder="True"
+                                    SelectedBackground="#1A000000"
+                                    Text="社交">
+                                    <Grid Margin="10,0,0,10">
+                                        <Grid.Width>
+                                            <MultiBinding Converter="{StaticResource WidthSubtractConverter}">
+                                                <Binding Path="Bounds.Width" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                                <Binding ElementName="tabItem1" Path="Bounds.Width" />
+                                            </MultiBinding>
+                                        </Grid.Width>
+                                        <Grid.Height>
+                                            <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                        </Grid.Height>
+                                        <ItemsControl ItemsSource="{Binding SocialTags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid
+                                                        Margin="5"
+                                                        Columns="5"
+                                                        Rows="7" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="2">
+                                                        <Border.Background>
+                                                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                        <Grid>
+                                                            <Rectangle
+                                                                ZIndex="1"
+                                                                Fill="#E6000000"
+                                                                Opacity="0.5">
+                                                                <Rectangle.IsVisible>
+                                                                    <MultiBinding Converter="{StaticResource OutRangeMaskVisibilityConverter}">
+                                                                        <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                        <Binding Path="IsSelected" />
+                                                                        <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                                    </MultiBinding>
+                                                                </Rectangle.IsVisible>
+                                                            </Rectangle>
+                                                            <Grid>
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Foreground="White"
+                                                                    Text="{Binding SocialTagData.Text, Mode=OneWay}" />
+                                                                <Canvas
+                                                                    Width="20"
+                                                                    Height="20"
+                                                                    HorizontalAlignment="Right"
+                                                                    IsVisible="{Binding IsSelected, Mode=OneWay}">
+                                                                    <Path
+                                                                        x:Name="checkedPath"
+                                                                        Data="M6,9 L9,12 14,7"
+                                                                        Opacity="5"
+                                                                        Stroke="#EAB181"
+                                                                        StrokeJoin="Round"
+                                                                        StrokeLineCap="Round"
+                                                                        StrokeThickness="2" />
+                                                                </Canvas>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Border.IsEnabled>
+                                                            <MultiBinding Converter="{StaticResource OutRangeEnableConverter}">
+                                                                <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                <Binding Path="IsSelected" />
+                                                                <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            </MultiBinding>
+                                                        </Border.IsEnabled>
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.MouseLeftButtonDown}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </controls:ImageTextTabItem>
+                                <controls:ImageTextTabItem
+                                    Height="40"
+                                    Background="#1A000000"
+                                    ImageSource="{StaticResource SocialTagTabItemIcon3Image}"
+                                    IsMouseOverHilightBoder="True"
+                                    IsSelectedHilgihtBoder="True"
+                                    SelectedBackground="#1A000000"
+                                    Text="个性">
+                                    <Grid Margin="10,0,0,10">
+                                        <Grid.Width>
+                                            <MultiBinding Converter="{StaticResource WidthSubtractConverter}">
+                                                <Binding Path="Bounds.Width" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                                <Binding ElementName="tabItem1" Path="Bounds.Width" />
+                                            </MultiBinding>
+                                        </Grid.Width>
+                                        <Grid.Height>
+                                            <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                        </Grid.Height>
+                                        <ItemsControl ItemsSource="{Binding PersonalityTags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid
+                                                        Margin="5"
+                                                        Columns="5"
+                                                        Rows="7" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="2">
+                                                        <Border.Background>
+                                                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                        <Grid>
+                                                            <Rectangle
+                                                                ZIndex="1"
+                                                                Fill="#E6000000"
+                                                                Opacity="0.5">
+                                                                <Rectangle.IsVisible>
+                                                                    <MultiBinding Converter="{StaticResource OutRangeMaskVisibilityConverter}">
+                                                                        <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                        <Binding Path="IsSelected" />
+                                                                        <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                                    </MultiBinding>
+                                                                </Rectangle.IsVisible>
+                                                            </Rectangle>
+                                                            <Grid>
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Foreground="White"
+                                                                    Text="{Binding SocialTagData.Text, Mode=OneWay}" />
+                                                                <Canvas
+                                                                    Width="20"
+                                                                    Height="20"
+                                                                    HorizontalAlignment="Right"
+                                                                    IsVisible="{Binding IsSelected, Mode=OneWay}">
+                                                                    <Path
+                                                                        x:Name="checkedPath"
+                                                                        Data="M6,9 L9,12 14,7"
+                                                                        Opacity="5"
+                                                                        Stroke="#EAB181"
+                                                                        StrokeJoin="Round"
+                                                                        StrokeLineCap="Round"
+                                                                        StrokeThickness="2" />
+                                                                </Canvas>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Border.IsEnabled>
+                                                            <MultiBinding Converter="{StaticResource OutRangeEnableConverter}">
+                                                                <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                <Binding Path="IsSelected" />
+                                                                <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            </MultiBinding>
+                                                        </Border.IsEnabled>
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.MouseLeftButtonDown}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </controls:ImageTextTabItem>
+                                <controls:ImageTextTabItem
+                                    Height="40"
+                                    Background="#1A000000"
+                                    ImageSource="{StaticResource SocialTagTabItemIcon4Image}"
+                                    IsMouseOverHilightBoder="True"
+                                    IsSelectedHilgihtBoder="True"
+                                    SelectedBackground="#1A000000"
+                                    Text="模式">
+                                    <Grid Margin="10,0,0,10">
+                                        <Grid.Width>
+                                            <MultiBinding Converter="{StaticResource WidthSubtractConverter}">
+                                                <Binding Path="Bounds.Width" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                                <Binding ElementName="tabItem1" Path="Bounds.Width" />
+                                            </MultiBinding>
+                                        </Grid.Width>
+                                        <Grid.Height>
+                                            <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                        </Grid.Height>
+                                        <ItemsControl ItemsSource="{Binding ModeTags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid
+                                                        Margin="5"
+                                                        Columns="5"
+                                                        Rows="7" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="2">
+                                                        <Border.Background>
+                                                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                        <Grid>
+                                                            <Rectangle
+                                                                ZIndex="1"
+                                                                Fill="#E6000000"
+                                                                Opacity="0.5">
+                                                                <Rectangle.IsVisible>
+                                                                    <MultiBinding Converter="{StaticResource OutRangeMaskVisibilityConverter}">
+                                                                        <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                        <Binding Path="IsSelected" />
+                                                                        <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                                    </MultiBinding>
+                                                                </Rectangle.IsVisible>
+                                                            </Rectangle>
+                                                            <Grid>
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Foreground="White"
+                                                                    Text="{Binding SocialTagData.Text, Mode=OneWay}" />
+                                                                <Canvas
+                                                                    Width="20"
+                                                                    Height="20"
+                                                                    HorizontalAlignment="Right"
+                                                                    IsVisible="{Binding IsSelected, Mode=OneWay}">
+                                                                    <Path
+                                                                        x:Name="checkedPath"
+                                                                        Data="M6,9 L9,12 14,7"
+                                                                        Opacity="5"
+                                                                        Stroke="#EAB181"
+                                                                        StrokeJoin="Round"
+                                                                        StrokeLineCap="Round"
+                                                                        StrokeThickness="2" />
+                                                                </Canvas>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Border.IsEnabled>
+                                                            <MultiBinding Converter="{StaticResource OutRangeEnableConverter}">
+                                                                <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                <Binding Path="IsSelected" />
+                                                                <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            </MultiBinding>
+                                                        </Border.IsEnabled>
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.MouseLeftButtonDown}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </controls:ImageTextTabItem>
+                                <controls:ImageTextTabItem
+                                    Height="40"
+                                    Background="#1A000000"
+                                    ImageSource="{StaticResource SocialTagTabItemIcon5Image}"
+                                    IsMouseOverHilightBoder="True"
+                                    IsSelectedHilgihtBoder="True"
+                                    SelectedBackground="#1A000000"
+                                    Text="语言">
+                                    <Grid Margin="10,0,0,10">
+                                        <Grid.Width>
+                                            <MultiBinding Converter="{StaticResource WidthSubtractConverter}">
+                                                <Binding Path="Bounds.Width" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                                <Binding ElementName="tabItem1" Path="Bounds.Width" />
+                                            </MultiBinding>
+                                        </Grid.Width>
+                                        <Grid.Height>
+                                            <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=TabControl}" />
+                                        </Grid.Height>
+                                        <ItemsControl ItemsSource="{Binding LanguageTags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid
+                                                        Margin="5"
+                                                        Columns="5"
+                                                        Rows="7" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Margin="2">
+                                                        <Border.Background>
+                                                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                        <Grid>
+                                                            <Rectangle
+                                                                ZIndex="1"
+                                                                Fill="#E6000000"
+                                                                Opacity="0.5">
+                                                                <Rectangle.IsVisible>
+                                                                    <MultiBinding Converter="{StaticResource OutRangeMaskVisibilityConverter}">
+                                                                        <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                        <Binding Path="IsSelected" />
+                                                                        <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                                    </MultiBinding>
+                                                                </Rectangle.IsVisible>
+                                                            </Rectangle>
+                                                            <Grid>
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Foreground="White"
+                                                                    Text="{Binding SocialTagData.Text, Mode=OneWay}" />
+                                                                <Canvas
+                                                                    Width="20"
+                                                                    Height="20"
+                                                                    HorizontalAlignment="Right"
+                                                                    IsVisible="{Binding IsSelected, Mode=OneWay}">
+                                                                    <Path
+                                                                        x:Name="checkedPath"
+                                                                        Data="M6,9 L9,12 14,7"
+                                                                        Opacity="5"
+                                                                        Stroke="#EAB181"
+                                                                        StrokeJoin="Round"
+                                                                        StrokeLineCap="Round"
+                                                                        StrokeThickness="2" />
+                                                                </Canvas>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Border.IsEnabled>
+                                                            <MultiBinding Converter="{StaticResource OutRangeEnableConverter}">
+                                                                <Binding Path="DataContext.SelectedCount" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                                <Binding Path="IsSelected" />
+                                                                <Binding Path="DataContext.MaxCount" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            </MultiBinding>
+                                                        </Border.IsEnabled>
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.MouseLeftButtonDown}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </controls:ImageTextTabItem>
+                            </TabControl>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" Margin="20,10">
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Foreground="White">
+                        <Run Text="可装配数量：" />
+                        <Run Text="{Binding SelectedCount, Mode=OneWay}" />
+                        <Run Text="/" />
+                        <Run Text="{Binding MaxCount, Mode=OneWay}" />
+                    </TextBlock>
+                </Grid>
+            </Grid>
+            <controls:EscBackControl
+                Grid.Row="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding ReturnCommand}" />
+        </Grid>
+    </Grid>
+</bases:UserControlBase>

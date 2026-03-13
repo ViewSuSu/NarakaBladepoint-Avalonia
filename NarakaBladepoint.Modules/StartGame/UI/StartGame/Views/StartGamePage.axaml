@@ -1,0 +1,145 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.StartGame.UI.StartGame.Views.StartGamePage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.StartGame.UI.StartGame.ViewModels"
+    d:DesignHeight="300"
+    d:DesignWidth="240"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.75*" />
+                <RowDefinition Height="0.25*" />
+                <RowDefinition Height="1.5*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <controls:HighlightBorder Grid.Row="0">
+                <controls:HighlightBorder.Background>
+                    <ImageBrush Source="{StaticResource StartGameEventCenterImage}" Stretch="UniformToFill" />
+                </controls:HighlightBorder.Background>
+                <Grid Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <Image
+                            Width="15"
+                            Source="{StaticResource EventCenterLogoImage}"
+                            Stretch="Uniform" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Foreground="White"
+                            Text="活动中心" />
+                    </StackPanel>
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding NavigateToEventCenterMainCommand}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                </Grid>
+                    <i:Interaction.Behaviors>
+                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                            <ia:InvokeCommandAction Command="{Binding NavigateToModelSelectionCommand}" />
+                        </ia:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+            </controls:HighlightBorder>
+            <controls:HighlightBorder Grid.Row="1" Margin="0,2">
+                <controls:HighlightBorder.Background>
+                    <ImageBrush Source="{StaticResource StartGameRankImage}" Stretch="Fill" />
+                </controls:HighlightBorder.Background>
+                <StackPanel
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Orientation="Vertical">
+                    <TextBlock Foreground="White" Text="无相龙王" />
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="20" Source="{StaticResource StarImage}" />
+                        <TextBlock VerticalAlignment="Center" Foreground="White">
+                            <Run Text="15" />
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </controls:HighlightBorder>
+            <Grid Grid.Row="2">
+                <Border Background="Black">
+                    <CheckBox
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Content="自动补充队友"
+                        Foreground="White"
+                        IsChecked="True" />
+                </Border>
+            </Grid>
+            <controls:HighlightBorder Grid.Row="3" Margin="0,2">
+                <controls:HighlightBorder.Background>
+                    <ImageBrush Source="{StaticResource StartGameModeSelectionImage}" Stretch="UniformToFill" />
+                </controls:HighlightBorder.Background>
+                <Grid Margin="10,3,5,3">
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                        <TextBlock Foreground="White" Text="组队范围" />
+                        <TextBlock Foreground="#EAB181">
+                            <Run Text="无间修罗" />
+                            <Run Text="~" />
+                            <Run Text="无量梵天" />
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Orientation="Vertical">
+                        <TextBlock
+                            Foreground="#EAB181"
+                            Text="豪杰对局"
+                            IsVisible="{Binding IsXiuLuo}" />
+                        <TextBlock Foreground="White">
+                            <Run Text="排位赛 "/>
+                            <Run Text="·" />
+                            <Run Text="三排" />
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Foreground="White"
+                        Text="龙隐洞天" />
+                </Grid>
+            </controls:HighlightBorder>
+            <controls:HighlightBorder Grid.Row="4">
+                <controls:HighlightBorder.Background>
+                    <ImageBrush Source="{StaticResource StartGameStartImage}" Stretch="UniformToFill" />
+                </controls:HighlightBorder.Background>
+                <TextBlock
+                    Grid.Row="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Foreground="White"
+                    Text="{Binding StartGameContent, Mode=OneWay}" />
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding StartGameCommand}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+            </controls:HighlightBorder>
+        </Grid>
+    </Grid>
+</base:UserControlBase>

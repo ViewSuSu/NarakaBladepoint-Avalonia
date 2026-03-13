@@ -1,0 +1,71 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.SocialTag.UI.Views.TagUserControl"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.ViewModels"
+    mc:Ignorable="d">
+    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+        <Grid
+            Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Bounds.Height}"
+            Margin="2,0"
+            IsVisible="{Binding IsSettingMic, Mode=OneWay}">
+            <Grid.Background>
+                <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+            </Grid.Background>
+            <Image
+                Height="20"
+                Source="{StaticResource SocialTagIcon1Image}"
+                IsVisible="{Binding IsHaveMicAndSelected, Mode=OneWay}" />
+            <Image
+                Height="20"
+                Source="{StaticResource SocialTagIcon2Image}"
+                IsVisible="{Binding IsHaveMicAndSelected, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}" />
+        </Grid>
+        <Grid
+            Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Bounds.Height}"
+            Margin="2,0"
+            IsVisible="{Binding IsSettingOnline, Mode=OneWay}">
+            <Grid.Background>
+                <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+            </Grid.Background>
+            <TextBlock
+                Margin="5,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="{Binding ContentFontSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Foreground="White"
+                Text="{Binding SelectedSocialTagOnlineModelContent, Mode=OneWay}" />
+        </Grid>
+        <ItemsControl
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding SelectedSocialTagModels, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Height="{Binding RelativeSource={RelativeSource AncestorType=StackPanel}, Path=Bounds.Height}"
+                        Margin="2,0">
+                        <Border.Background>
+                            <ImageBrush Source="{StaticResource SocialTagBackgroundImage}" Stretch="UniformToFill" />
+                        </Border.Background>
+                        <TextBlock
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="{Binding ContentFontSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            Foreground="White"
+                            Text="{Binding SocialTagData.Text, Mode=OneWay}" />
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</bases:UserControlBase>

@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.CommonFunction.Views.CommonFunctionPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.CommonFunction.ViewModels"
+    d:DesignHeight="100"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <TabControl
+        VerticalAlignment="Center"
+        Background="Transparent"
+        BorderThickness="0">
+        <TabItem Header="英雄" IsSelected="{Binding IsSelectedHero}" />
+        <TabItem Header="兵器" IsSelected="{Binding IsSelectedWeapon}" />
+        <TabItem Header="备战" IsSelected="{Binding IsSelectedSkillPoint}" />
+        <TabItem Header="聚义厅" IsSelected="{Binding IsSelectedGuildHall}" />
+        <TabItem Header="大厅" IsSelected="{Binding IsSelectedHall}">
+            <i:Interaction.Behaviors>
+                <ia:DataTriggerBehavior Binding="{Binding IsSelectedHall}" ComparisonCondition="Equal" Value="True">
+                    <ia:InvokeCommandAction Command="{Binding RemoveMainContentCommand}" />
+                </ia:DataTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </TabItem>
+        <TabItem Header="排行榜" IsSelected="{Binding IsSelectedLeaderboard}" />
+        <TabItem Header="仓库" IsSelected="{Binding IsSelectedInventory}" />
+        <TabItem Header="商店" IsSelected="{Binding IsSelectedStore}" />
+        <TabItem Header="自定义房间" IsSelected="{Binding IsSelectedCustomMatch}" />
+    </TabControl>
+</UserControl>
+

@@ -1,0 +1,497 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.Social.UI.Friend.Views.FriendPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tagUsercontrol="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.Views"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.Social.UI.Friend.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    x:ClassModifier="internal"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid Background="Transparent">
+        <i:Interaction.Behaviors>
+            <ia:EventTriggerBehavior EventName="PointerPressed">
+                <ia:InvokeCommandAction Command="{Binding CloseCommand}" />
+            </ia:EventTriggerBehavior>
+        </i:Interaction.Behaviors>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid Background="Transparent">
+        </Grid>
+        <Grid Grid.Column="1">
+            <Rectangle Fill="#BB090000">
+                <Rectangle.Effect>
+                    <BlurEffect Radius="10" />
+                </Rectangle.Effect>
+            </Rectangle>
+            <Grid Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <controls:AvatarControl
+                            BackgroundImage="{Binding CurrentUserInfoModel.Avatar, Mode=OneWay}"
+                            ImageStretch="Uniform" />
+                        <UniformGrid
+                            Grid.Column="1"
+                            Margin="10,0,0,0"
+                            Rows="3">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="20"
+                                Foreground="White"
+                                Text="{Binding CurrentUserInfoModel.Name}" />
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Foreground="White">
+                                    <Run Text="ID:" />
+                                    <Run Text="{Binding CurrentUserInfoModel.Id}" />
+                                </TextBlock>
+                                <Image
+                                    Width="20"
+                                    Margin="10,0,0,0"
+                                    Source="{StaticResource CopyImage}"
+                                    Stretch="Uniform">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding CopyIdCommand}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                </Image>
+                            </StackPanel>
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                        <ia:InvokeCommandAction Command="{Binding SettingTagCommand}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="15"
+                                    Source="{StaticResource OnlineImage}"
+                                    Stretch="Uniform" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    Text="空闲" />
+                            </StackPanel>
+                        </UniformGrid>
+                    </Grid>
+                    <controls:HighlightBorder
+                        Grid.Row="1"
+                        Margin="0,5"
+                        BorderBrush="White"
+                        BorderThickness="0.2"
+                        IsVisible="{Binding IsHaveVilidTag, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Image
+                                Width="20"
+                                Margin="5,0,0,0"
+                                Source="{StaticResource ClickSettingTagImage}"
+                                Stretch="Uniform" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Text="点击设置标签" />
+                        </StackPanel>
+                    </controls:HighlightBorder>
+                    <Grid
+                        Grid.Row="1"
+                        Margin="0,5"
+                        IsVisible="{Binding IsHaveVilidTag, Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <tagUsercontrol:TagUserControl
+                            Grid.Row="1"
+                            Margin="0,5"
+                            ContentFontSize="10" />
+                        <Image
+                            Grid.Column="1"
+                            Width="20"
+                            HorizontalAlignment="Right"
+                            Source="{StaticResource ClickSettingTagImage}"
+                            Stretch="Uniform">
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                        <ia:InvokeCommandAction Command="{Binding SettingTagCommand}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                        </Image>
+                    </Grid>
+
+                    <Border
+                        Grid.Row="2"
+                        Margin="0,5"
+                        BorderBrush="White"
+                        BorderThickness="0.2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="0.15*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Width="20" Source="{StaticResource SearchMagnifierImage}" />
+                            <controls:PlaceholderTextBox
+                                Name="SearchBox"
+                                Grid.Column="1"
+                                VerticalContentAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="White"
+                                Placeholder="输入玩家名或ID搜索或添加"
+                                PlaceholderForeground="#64FFFFFF">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="TextChanged">
+                                            <ia:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding #SearchBox.Text}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                            </controls:PlaceholderTextBox>
+                            <Image
+                                Grid.Column="2"
+                                Width="20"
+                                PointerPressed="Image_MouseLeftButtonDown"
+                                Source="{StaticResource ClearSearchImage}">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{x:Null}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                            </Image>
+                        </Grid>
+                    </Border>
+                    <TabControl
+                        Grid.Row="3"
+                        Background="Transparent">
+                        <TabItem
+                            Height="30"
+                            Header="找搭子"
+                            IsSelected="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="40" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image
+                                            Width="30"
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{StaticResource RefreshImage}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="30"
+                                            Margin="10,0,0,0"
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{StaticResource FilterImage}"
+                                            Stretch="Uniform" />
+                                    </StackPanel>
+                                    <Button
+                                        Grid.Column="1"
+                                        Width="100"
+                                        Content="发布招募"
+                                        Foreground="White" />
+                                </Grid>
+                                <ItemsControl
+                                    Grid.Row="1"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    ItemsSource="{Binding Teammates}"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl.Template>
+                                        <ControlTemplate TargetType="ItemsControl">
+                                            <ScrollViewer Padding="{TemplateBinding Padding}">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ItemsControl.Template>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,5">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        Source="{Binding Avatar, Mode=OneWay}"
+                                                        Stretch="Uniform" />
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Margin="10,0,10,0"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="12"
+                                                        Foreground="White"
+                                                        Text="{Binding Name, Mode=OneWay}" />
+                                                    <Image
+                                                        Grid.Column="2"
+                                                        Source="{Binding Avatar, Mode=OneWay}"
+                                                        Stretch="Uniform" />
+                                                    <StackPanel
+                                                        Grid.Column="3"
+                                                        Margin="10,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        Orientation="Vertical">
+                                                        <TextBlock
+                                                            FontSize="12"
+                                                            Foreground="White"
+                                                            Text="{Binding Description, Mode=OneWay}" />
+                                                    </StackPanel>
+                                                    <StackPanel
+                                                        Grid.Column="4"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        Orientation="Horizontal">
+                                                        <Image
+                                                            Width="25"
+                                                            Height="25"
+                                                            Margin="5,0"
+                                                            Source="{StaticResource BlockImage}"
+                                                            Stretch="Uniform">
+                                                                <i:Interaction.Behaviors>
+                                                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                        <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.BlockCommand}" CommandParameter="{Binding}" />
+                                                                    </ia:EventTriggerBehavior>
+                                                                </i:Interaction.Behaviors>
+                                                        </Image>
+                                                        <Image
+                                                            Width="25"
+                                                            Height="25"
+                                                            Source="{StaticResource RecruitmentImage}"
+                                                            Stretch="Uniform">
+                                                                <i:Interaction.Behaviors>
+                                                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                        <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.RecruitCommand}" CommandParameter="{Binding}" />
+                                                                    </ia:EventTriggerBehavior>
+                                                                </i:Interaction.Behaviors>
+                                                        </Image>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <ItemsControl
+                                                    Grid.Row="1"
+                                                    Margin="0,5,0,0"
+                                                    HorizontalAlignment="Left"
+                                                    ItemsSource="{Binding Tags}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel />
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border
+                                                                Height="15"
+                                                                Margin="0,0,5,0"
+                                                                Background="{StaticResource Background5Brush}">
+                                                                <TextBlock
+                                                                    Margin="10,0"
+                                                                    VerticalAlignment="Center"
+                                                                    Foreground="White"
+                                                                    Text="{Binding .}" />
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Grid Grid.Row="2" Margin="0,5">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <CheckBox
+                                            VerticalAlignment="Center"
+                                            Content="显示队伍"
+                                            Foreground="White" />
+                                        <CheckBox
+                                            Margin="50,0,0,0"
+                                            VerticalAlignment="Center"
+                                            Content="显示个人"
+                                            Foreground="White" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem
+                            Height="30"
+                            Header="联系人">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Expander
+                                    Grid.Row="0"
+                                    Foreground="White"
+                                    Header="聚义厅 0/0" />
+                                <Expander
+                                    Grid.Row="1"
+                                    Foreground="White"
+                                    Header="默认分组   0/13">
+                                    <ItemsControl
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        ItemsSource="{Binding Friends}"
+                                        ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                        <ItemsControl.Template>
+                                            <ControlTemplate TargetType="ItemsControl">
+                                                <ScrollViewer Padding="{TemplateBinding Padding}">
+                                                    <ItemsPresenter />
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </ItemsControl.Template>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Columns="1" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid MaxHeight="40" Margin="0,0,20,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.15*" />
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="0.1*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        Source="{Binding Avatar, Mode=OneWay}"
+                                                        Stretch="Uniform" />
+                                                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                                                        <TextBlock
+                                                            Foreground="White"
+                                                            Text="{Binding Name, Mode=OneWay}" />
+                                                        <TextBlock
+                                                            Margin="0,5,0,0"
+                                                            Foreground="White"
+                                                            Text="在线" />
+                                                    </StackPanel>
+                                                    <Image
+                                                        Grid.Column="2"
+                                                        Source="{StaticResource SayHelloImage}"
+                                                        Stretch="Uniform">
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.SayHelloCommand}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                    </Image>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Expander>
+                                <Expander
+                                    Grid.Row="2"
+                                    Foreground="White"
+                                    Header="屏蔽名单  0/0" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem
+                            Height="30"
+                            Header="最近">
+                            <ListBox
+                                Background="Transparent"
+                                BorderThickness="0"
+                                ItemsSource="{Binding Friends}"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid MaxHeight="40">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                HorizontalAlignment="Left"
+                                                Source="{Binding Avatar, Mode=OneWay}"
+                                                Stretch="Uniform" />
+                                            <StackPanel
+                                                Grid.Column="1"
+                                                Margin="10,0,0,0"
+                                                Orientation="Vertical">
+                                                <TextBlock
+                                                    Foreground="White"
+                                                    Text="{Binding Name, Mode=OneWay}" />
+                                                <TextBlock
+                                                    Margin="0,5,0,0"
+                                                    FontSize="10"
+                                                    Foreground="#EAB181"
+                                                    Text="{Binding Status, Mode=OneWay}" />
+                                            </StackPanel>
+                                            <Image
+                                                Grid.Column="2"
+                                                Width="20"
+                                                Margin="0,0,10,0"
+                                                HorizontalAlignment="Right"
+                                                Source="{StaticResource FriendInvImage}"
+                                                Stretch="Uniform" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </TabItem>
+                        <TabItem
+                            Height="30"
+                            Header="附近">
+                            <Expander
+                                Grid.Row="0"
+                                Foreground="White"
+                                Header="附近玩家" />
+                        </TabItem>
+                        <TabItem
+                            Height="30"
+                            Header="申请">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="暂无好友申请" />
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Grid>
+            <controls:EscBackControl
+                Grid.Row="4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding CloseCommand}" />
+        </Grid>
+    </Grid>
+</base:UserControlBase>

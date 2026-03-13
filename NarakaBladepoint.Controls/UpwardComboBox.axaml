@@ -1,0 +1,67 @@
+<UserControl
+    x:Class="NarakaBladepoint.Controls.UpwardComboBox"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="30"
+    d:DesignWidth="200"
+    mc:Ignorable="d">
+    <Grid>
+        <Border
+            x:Name="PART_DisplayBorder"
+            Background="Transparent"
+            BorderThickness="1"
+            PointerPressed="DisplayBorder_PointerPressed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Content="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=local:UpwardComboBox}}"
+                    ContentTemplate="{Binding ItemTemplate, RelativeSource={RelativeSource AncestorType=local:UpwardComboBox}}" />
+                <PathIcon
+                    x:Name="ArrowCollapsed"
+                    Grid.Column="1"
+                    Width="8"
+                    Height="5"
+                    Margin="0,0,4,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Data="M 0 0 L 8 0 L 4 5 Z"
+                    Foreground="White" />
+                <PathIcon
+                    x:Name="ArrowExpanded"
+                    Grid.Column="1"
+                    Width="5"
+                    Height="8"
+                    Margin="0,0,4,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Data="M 0 0 L 5 4 L 0 8 Z"
+                    Foreground="White"
+                    IsVisible="False" />
+            </Grid>
+        </Border>
+        <Popup
+            x:Name="PART_Popup"
+            Width="{Binding #PART_DisplayBorder.Bounds.Width}"
+            Placement="Top"
+            PlacementTarget="{Binding #PART_DisplayBorder}"
+            IsLightDismissEnabled="True">
+            <Border
+                Background="Transparent"
+                BorderBrush="Gray"
+                BorderThickness="1">
+                <ItemsControl
+                    x:Name="PART_ItemsControl"
+                    ItemTemplate="{Binding ItemTemplate, RelativeSource={RelativeSource AncestorType=local:UpwardComboBox}}"
+                    ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource AncestorType=local:UpwardComboBox}}" />
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

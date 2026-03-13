@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ImageSourceStyle.axaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <ImageBrush x:Key="DefaultHighlightBackground" Source="{StaticResource Background4Image}" />
+    <ImageBrush
+        x:Key="DefaultBackgroundBrush"
+        Source="{StaticResource Background2Image}"
+        Stretch="UniformToFill" />
+    <ImageBrush
+        x:Key="IllustratedCollectionOverviewBrush"
+        Source="{StaticResource IllustratedCollectionOverviewImage}"
+        Stretch="Uniform" />
+    <ImageBrush
+        x:Key="Background2"
+        Source="{StaticResource Background2Image}"
+        Stretch="Fill" />
+    <ImageBrush
+        x:Key="Background5Brush"
+        Source="{StaticResource Background5Image}"
+        Stretch="UniformToFill" />
+    <ImageBrush
+        x:Key="PersonalInfoDetailsBackgroundBrush"
+        Source="{StaticResource PersonalInfoDetailsBackgroundImage}"
+        Stretch="Fill" />
+
+    <!-- Hero Tag Background Brushes -->
+    <ImageBrush
+        x:Key="HeroTagBackground1Brush"
+        Source="{StaticResource HeroTagBackground1Image}"
+        Stretch="Fill" />
+    <ImageBrush
+        x:Key="HeroTagBackground2Brush"
+        Source="{StaticResource HeroTagBackground2Image}"
+        Stretch="Fill" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground" Color="#1A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground2" Color="#2A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground3" Color="#3A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground4" Color="#4A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground5" Color="#5A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground6" Color="#6A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground7" Color="#7A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground8" Color="#8A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground9" Color="#9A000000" />
+    <SolidColorBrush x:Key="DefaultTransientBlackBackground10" Color="#AA000000" />
+    <SolidColorBrush x:Key="DefaultOrangeBrush" Color="#EAB181" />
+</ResourceDictionary>

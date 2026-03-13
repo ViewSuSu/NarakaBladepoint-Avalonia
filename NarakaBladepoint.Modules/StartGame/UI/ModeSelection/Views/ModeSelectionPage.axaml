@@ -1,0 +1,875 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.StartGame.UI.ModeSelection.Views.ModeSelectionPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.StartGame.UI.ModeSelection.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    x:ClassModifier="internal"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*" />
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="28"
+            Foreground="White"
+            Text="选择模式" />
+        <TabControl
+            x:Name="ModeTabControl"
+            Grid.Row="1"
+            Margin="50,0"
+            Background="Transparent"
+            BorderThickness="0"
+            SelectedIndex="{Binding SelectedTabIndex}">
+            <controls:ImageTextTabItem
+                Name="ModeSelectionTabItem1"
+                Height="40"
+                Background="#3A000000"
+                FontSize="18"
+                ImageHeight="30"
+                ImageSource="{StaticResource ModeSelectionTabItem1Image}"
+                ImageWidth="30"
+                Text="生存">
+                <UniformGrid Margin="0,20,0,0" Columns="4">
+                    <Grid VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                Name="image1"
+                                ZIndex="0"
+                                attach:ControlHoverBehavior.IsEnabled="True"
+                                Source="{StaticResource StartGameRankingMatchImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                Margin="5"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                                <Image Width="40" Source="{StaticResource ModeSelectionIcon4Image}" />
+                                <Image Width="25" Source="{StaticResource ModeSelectionIcon1Image}" />
+                            </StackPanel>
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="排位赛 "/>
+                                <TextBlock
+                                    Margin="10,0,10,10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="#BBBBBB"
+                                    Text="天选之人 "/>
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=0, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Grid>
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=1, Converter={StaticResource StringToIntConverter}}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                Name="second"
+                                ZIndex="0"
+                                attach:ControlHoverBehavior.IsEnabled="True"
+                                Source="{StaticResource StartGameQuickMatchImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <Image
+                                Width="25"
+                                Margin="5"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Source="{StaticResource ModeSelectionIcon1Image}" />
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="快速比赛 "/>
+                                <TextBlock
+                                    Margin="10,0,10,10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="#BBBBBB"
+                                    Text="天选之人 "/>
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=2, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Grid>
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=3, Converter={StaticResource StringToIntConverter}}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+
+                    <Grid VerticalAlignment="Bottom">
+                        <Border ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                attach:ControlHoverBehavior.IsEnabled="True"
+                                Source="{StaticResource StartGameHeavenlyBattleImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                Margin="5"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                                <Border Background="#2A000000" CornerRadius="4">
+                                    <Image Width="40" Source="{StaticResource ModeSelectionIcon4Image}" />
+                                </Border>
+                                <Image Width="25" Source="{StaticResource ModeSelectionIcon1Image}" />
+                            </StackPanel>
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="天人之战" />
+                                <TextBlock
+                                    Margin="10,0,10,10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="#EAB181"
+                                    Text="每日19:00-23:00开启 "/>
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=4, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Grid>
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=5, Converter={StaticResource StringToIntConverter}}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+
+                    <Border
+                        Name="ModeSelection"
+                        Margin="5,0"
+                        BorderThickness="2"
+                        ClipToBounds="True">
+                        <Grid VerticalAlignment="Bottom">
+                            <Image
+                                ZIndex="0"
+                                attach:ControlHoverBehavior.IsEnabled="True"
+                                Source="{StaticResource StartGameAIPracticeImage}"
+                                Stretch="Fill" />
+                            <Grid ZIndex="1">
+                                <Image
+                                    Width="25"
+                                    Margin="5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Source="{StaticResource ModeSelectionIcon1Image}" />
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Vertical">
+                                    <TextBlock
+                                        Margin="10"
+                                        HorizontalAlignment="Center"
+                                        FontSize="18"
+                                        Foreground="White"
+                                        Text="人机演练" />
+                                    <TextBlock
+                                        Margin="10,0,10,10"
+                                        HorizontalAlignment="Center"
+                                        FontSize="10"
+                                        Foreground="#BBBBBB"
+                                        Text=""
+                                        IsVisible="False" />
+                                </StackPanel>
+                            </Grid>
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                        <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=6, Converter={StaticResource StringToIntConverter}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=7, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Border>
+                </UniformGrid>
+                <!--<Grid>
+                -->
+                <!--<StackPanel
+                        Margin="20,0,20,20"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <StackPanel Margin="0,0,20,0" Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,0,10,0"
+                                Foreground="White"
+                                Text="杭州市 "/>
+                            <TextBlock Foreground="Green" Text="21ms" />
+                        </StackPanel>
+                        <StackPanel Margin="0,0,20,0" Orientation="Horizontal">
+                            <StackPanel Margin="0,0,20,0" Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="0,0,5,0"
+                                    Foreground="White"
+                                    Text="预选英雄 "/>
+                                <Border
+                                    Width="30"
+                                    Height="30"
+                                    Margin="0,0,5,0"
+                                    Background="Gray"
+                                    CornerRadius="4" />
+                                <Border
+                                    Width="30"
+                                    Height="30"
+                                    Margin="0,0,5,0"
+                                    Background="Gray"
+                                    CornerRadius="4" />
+                                <Border
+                                    Width="30"
+                                    Height="30"
+                                    Background="Gray"
+                                    CornerRadius="4" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="0,0,5,0"
+                                    Foreground="White"
+                                    Text="地图" />
+                                <Border
+                                    Width="150"
+                                    Height="30"
+                                    Background="Gray"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="龙隐洞天" />
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Vertical">
+                            <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                                <Button
+                                    Width="60"
+                                    Margin="0,0,10,0"
+                                    Content="单排" />
+                                <Button
+                                    Width="60"
+                                    Margin="0,0,10,0"
+                                    Content="双排" />
+                                <Button
+                                    Width="60"
+                                    Background="#D4A056"
+                                    Content="三排" />
+                            </StackPanel>
+                            <Button
+                                Width="100"
+                                Height="40"
+                                Background="#E74C3C"
+                                Content="确定" />
+                        </StackPanel>-->
+                <!--</StackPanel>-->
+                <!--
+                </Grid>-->
+            </controls:ImageTextTabItem>
+
+            <!--  2. 娱乐标签页 -->
+            <controls:ImageTextTabItem
+                Height="40"
+                Background="#3A000000"
+                FontSize="18"
+                ImageHeight="30"
+                ImageSource="{StaticResource ModeSelectionTabItem2Image}"
+                ImageWidth="30"
+                Text="娱乐">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border
+                            Grid.Row="0"
+                            Margin="0,10,5,0"
+                            Background="{StaticResource DefaultTransientBlackBackground2}">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    Source="{StaticResource StartGameLimitedTimeIcon}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="{StaticResource DefaultOrangeBrush}">
+                                    <Run Text="{Binding EntertainmentLimitedTimeRemaining.Hours, StringFormat=D2, Mode=OneWay}" />
+                                    <Run Text=":" />
+                                    <Run Text="{Binding EntertainmentLimitedTimeRemaining.Minutes, StringFormat=D2, Mode=OneWay}" />
+                                    <Run Text=":" />
+                                    <Run Text="{Binding EntertainmentLimitedTimeRemaining.Seconds, StringFormat=D2, Mode=OneWay}" />
+                                </TextBlock>
+                                <TextBlock
+                                    Margin="3,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="{StaticResource DefaultOrangeBrush}"
+                                    Text="限时全开中 "/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="1" ClipToBounds="True">
+                            <Grid>
+                                <Image
+                                    ZIndex="0"
+                                    Source="{StaticResource StartGameEntertainmentTerrainWarImage}"
+                                    Stretch="Uniform" />
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Vertical">
+                                    <TextBlock
+                                        Margin="10"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        Text="地脉之战" />
+                                </StackPanel>
+                            </Grid>
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                        <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=8, Converter={StaticResource StringToIntConverter}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                        </Border>
+
+                        <Border Grid.Row="2" ClipToBounds="True">
+                            <Grid>
+                                <Image
+                                    ZIndex="0"
+                                    Source="{StaticResource StartGameEntertainmentDarkTidImage}"
+                                    Stretch="Uniform" />
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Vertical">
+                                    <TextBlock
+                                        Margin="10"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"
+                                        Text="暗域狂潮" />
+                                </StackPanel>
+                            </Grid>
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                        <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=9, Converter={StaticResource StringToIntConverter}}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                        </Border>
+                    </Grid>
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=10, Converter={StaticResource StringToIntConverter}}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        ClipToBounds="True">
+                        <Grid VerticalAlignment="Bottom">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameEntertainmentHexagonalRaidImage}"
+                                Stretch="Uniform" />
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    Text="六芒劫 "/>
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=11, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Border>
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        ClipToBounds="True">
+                        <Grid VerticalAlignment="Bottom">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameEntertainmentEndlessTrialImage}"
+                                Stretch="Uniform" />
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    Text="无尽试炼" />
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=12, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Border>
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="3"
+                        ClipToBounds="True">
+                        <Grid VerticalAlignment="Bottom">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameEntertainmentMartialArtsPeakImage}"
+                                Stretch="Uniform" />
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    Text="武道争锋" />
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=13, Converter={StaticResource StringToIntConverter}}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Border>
+                </Grid>
+                    <i:Interaction.Behaviors>
+                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                            <ia:InvokeCommandAction Command="{Binding SelectModeCommand}" CommandParameter="{Binding Source=14, Converter={StaticResource StringToIntConverter}}" />
+                        </ia:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+            </controls:ImageTextTabItem>
+
+            <controls:ImageTextTabItem
+                Height="40"
+                Background="#3A000000"
+                FontSize="18"
+                ImageHeight="30"
+                ImageSource="{StaticResource ModeSelectionTabItem3Image}"
+                ImageWidth="30"
+                Text="训练">
+                <UniformGrid Margin="0,20,0,0" Columns="3">
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameTrainingOperationTeachingImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="操作教学" />
+                            </StackPanel>
+                        </Grid>
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding ChoseHeroCommand}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Grid>
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding ChoseMapCommand}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameTrainingAdvancedTeachingImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="进阶教学" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameTrainingFreelyPracticeImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="自由练习" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </UniformGrid>
+            </controls:ImageTextTabItem>
+
+            <controls:ImageTextTabItem
+                Name="ModeSelectionTabItem4"
+                Height="40"
+                Background="#3A000000"
+                FontSize="18"
+                ImageHeight="30"
+                ImageSource="{StaticResource ModeSelectionTabItem4Image}"
+                ImageWidth="30"
+                Text="休闲">
+                <UniformGrid Margin="0,20,0,0" Columns="3">
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameLeisureDiceGameImage}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="永劫掼蛋" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameLeisureComingSoon1Image}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="敬请期待" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="5,0" VerticalAlignment="Bottom">
+                        <Border BorderThickness="2" ClipToBounds="True">
+                            <Image
+                                ZIndex="0"
+                                Source="{StaticResource StartGameLeisureComingSoon2Image}"
+                                Stretch="Fill" />
+                        </Border>
+                        <Grid ZIndex="1">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="敬请期待" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </UniformGrid>
+            </controls:ImageTextTabItem>
+
+
+            <controls:ImageTextTabItem IsVisible="False" />
+            <controls:ImageTextTabItem IsVisible="False" />
+        </TabControl>
+        <Grid Grid.Row="2" Margin="60,0">
+            <StackPanel
+                Margin="0,30,0,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <controls:HighlightBorder
+                    Name="heroList"
+                    Width="160"
+                    Height="70"
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    BorderBrush="White"
+                    BorderThickness="0.1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Background="#2A000000">
+                            <TextBlock
+                                Margin="3,0"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Text="预选英雄 "/>
+                            <Image
+                                Width="20"
+                                Margin="3,0"
+                                HorizontalAlignment="Right"
+                                Source="{StaticResource ModeSelectionIcon5Image}" />
+                        </Grid>
+                        <UniformGrid Grid.Row="1" Columns="3">
+                            <Image Source="{Binding FirstHeroAvatar, Mode=OneWay}" />
+                            <Image Source="{Binding SecondHeroAvatar, Mode=OneWay}" />
+                            <Image Source="{Binding ThirdHeroAvatar, Mode=OneWay}" />
+                        </UniformGrid>
+
+                    </Grid>
+                </controls:HighlightBorder>
+
+                <controls:HighlightBorder
+                    Name="mapList"
+                    Width="210"
+                    Height="70"
+                    Margin="0,0,30,0"
+                    VerticalAlignment="Top">
+                    <controls:HighlightBorder.Background>
+                        <ImageBrush Source="{StaticResource ModeSelectionIcon2Image}" Stretch="Uniform" />
+                    </controls:HighlightBorder.Background>
+                    <Grid>
+                        <StackPanel
+                            Margin="5,5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal">
+                            <Image Width="20" Source="{StaticResource ModeSelectionIcon1Image}" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Text="地图" />
+                        </StackPanel>
+                        <Image
+                            Width="20"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Source="{StaticResource ModeSelectionIcon5Image}" />
+                        <StackPanel
+                            Margin="5,0,0,5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Center"
+                                FontSize="15"
+                                Foreground="White"
+                                Text="已选择" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Center"
+                                FontSize="15"
+                                Foreground="#EAB181"
+                                Text="{Binding SelectedMapCount, Mode=OneWay}" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                HorizontalAlignment="Center"
+                                FontSize="15"
+                                Foreground="White"
+                                Text="张地图 "/>
+                        </StackPanel>
+                    </Grid>
+                </controls:HighlightBorder>
+                <StackPanel Orientation="Vertical">
+                    <TabControl
+                        Name="modeList"
+                        Width="{Binding ElementName=ModeSelection, Path=Bounds.Width}"
+                        VerticalAlignment="Top"
+                        Background="Transparent">
+                        <TabItem
+                            Name="tabItem1"
+                            Header="单排"
+                            IsSelected="{Binding IsSoloMode}" />
+                        <TabItem
+                            Name="tabItem2"
+                            Header="双排" />
+                        <TabItem
+                            Name="tabItem3"
+                            Header="三排"
+                            IsSelected="True" />
+                    </TabControl>
+                    <Button
+                        Name="button"
+                        Grid.Row="1"
+                        Height="30"
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Top"
+                        Command="{Binding ReturnCommand}">
+                    </Button>
+                    <TextBlock
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Center"
+                        Foreground="#EAB181"
+                        Text="组队范围" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Foreground="#EAB181"
+                        Text="铂金5~无间修罗" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Height="30"
+                Margin="0,0,0,80"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <Image
+                    Width="20"
+                    Margin="5,0"
+                    Source="{StaticResource ModeSelectionIcon1Image}" />
+                <controls:UpwardComboBox
+                    Width="150"
+                    Background="#2A000000"
+                    ItemsSource="{Binding ServerInfos}"
+                    SelectedItem="{Binding SelectedItem}">
+                    <controls:UpwardComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="#2A000000">
+                                <TextBlock
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Left"
+                                    Foreground="White"
+                                    Text="{Binding City, Mode=OneWay}" />
+                                <TextBlock
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    Foreground="Green">
+                                    <Run Text="{Binding NetworkLatency}" />
+                                    <Run Text="ms" />
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:UpwardComboBox.ItemTemplate>
+                </controls:UpwardComboBox>
+            </StackPanel>
+        </Grid>
+        <controls:EscBackControl
+            Grid.Row="3"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnCommand}" />
+    </Grid>
+</base:UserControlBase>

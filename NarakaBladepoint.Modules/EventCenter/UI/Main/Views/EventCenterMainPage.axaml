@@ -1,0 +1,147 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.EventCenter.UI.Main.Views.EventCenterMainPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:baize="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.BaiZeCard.Views"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:bindReward="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.BindReward.Views"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:latestNews="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.LatestNews.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:moonGazingPavilion="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.MoonGazingPavilion.Views"
+    xmlns:netEasePayRewards="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.NetEasePayRewards.Views"
+    xmlns:passingTheFlame="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.PassingTheFlame.Views"
+    xmlns:patchNotePage="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.PatchNote.Views"
+    xmlns:penglaiGuide="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.PenglaiGuide.Views"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:targetedChestGuarantee="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.TargetedChestGuarantee.Views"
+    xmlns:timeLimitedEvent="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.TimeLimitedEvent.Views"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.Main.ViewModels"
+    xmlns:welcomeback="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.WelcomeBackEvent.Views"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition />
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                Margin="50,10"
+                ZIndex="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="30"
+                    Foreground="White"
+                    Text="活动中心" />
+            </Grid>
+            <TabControl
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                attach:TabControlContentMarginAttachedProperty.IsAutoAdjustContentMargin="True"
+                Background="Transparent"
+                BorderThickness="0">
+                
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="近期热点"
+                    IsSelected="{Binding IsSelectedLatestNews}">
+                    <latestNews:LatestNewsPage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="限时活动"
+                    IsSelected="{Binding IsSelectedLimitedEvent}">
+                    <timeLimitedEvent:TimeLimitedEventPageOne />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="揽月阁"
+                    IsSelected="{Binding IsSelectedMoonGazingPavilion}">
+                    <moonGazingPavilion:MoonGazingPavilionPage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="白泽月卡"
+                    IsSelected="{Binding IsSelectedBaiZeCard}">
+                    <baize:BaiZeCardPage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="绑定有礼"
+                    IsSelected="{Binding IsSelectedBindReward}">
+                    <bindReward:BindRewardPage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="英雄归来"
+                    IsSelected="{Binding IsSelectedWelcomeBack}">
+                    <welcomeback:WelcomeBackEventPage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="传火"
+                    IsSelected="{Binding IsSelectedPassingTheFlame}">
+                    <passingTheFlame:PassingTheFlamePage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="蓬莱指南"
+                    IsSelected="{Binding IsSelectedPenglaiGuide}">
+                    <penglaiGuide:PenglaiGuidePage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="更新公告"
+                    IsSelected="{Binding IsSelectedPatchNote}">
+                    <patchNotePage:PatchNotePage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="网易支付好礼"
+                    IsSelected="{Binding IsSelectedNetEasePayRewards}">
+                    <netEasePayRewards:NetEasePayRewardsPage />
+                </TabItem>
+                <TabItem
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header="宝箱定向保底"
+                    IsSelected="{Binding IsSelectedTargetedChestGuarantee}">
+                    <targetedChestGuarantee:TargetedChestGuaranteePage />
+                </TabItem>
+                <TabItem
+                    Width="100"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    Header=""
+                    IsVisible="False" />
+            </TabControl>
+        </Grid>
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            ZIndex="10"
+            Command="{Binding ReturnCommand}" />
+        <ContentControl prism:RegionManager.RegionName="123" />
+    </Grid>
+</bases:UserControlBase>

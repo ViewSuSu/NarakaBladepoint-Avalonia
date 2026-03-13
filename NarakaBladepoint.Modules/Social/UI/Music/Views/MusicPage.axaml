@@ -1,0 +1,254 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.Social.UI.Music.Views.MusicPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.Social.UI.Music.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <bases:UserControlBase.Resources>
+        <!--  Music Info Panel Style  -->
+        
+
+        <!--  Music DataGrid Cell Style  -->
+        
+    </bases:UserControlBase.Resources>
+    <Grid Background="{StaticResource Background2}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--  Top header  -->
+            <Grid
+                x:Name="topGrid"
+                Grid.Row="0"
+                Background="{StaticResource PersonalInfoDetailsBackgroundBrush}">
+                <Grid Margin="50,10">
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="大厅音乐" />
+                </Grid>
+            </Grid>
+
+            <!--  Main content  -->
+            <Grid Grid.Row="1" Margin="20,50,20,80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--  Left sidebar - Music category list  -->
+                <Grid Name="leftSidebar" Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--  Scrollable music category list  -->
+                    <ScrollViewer Margin="0,0,0,10" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="stackpanel" Orientation="Vertical">
+                            <controls:HighlightBorder
+                                Name="tabitem1"
+                                Height="45"
+                                Background="{StaticResource DefaultTransientBlackBackground2}"
+                                BorderThickness="2">
+                                <TextBlock
+                                    Margin="15,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="White"
+                                    Text="{Binding MusicCategoryOne}" />
+                            </controls:HighlightBorder>
+                            <controls:HighlightBorder
+                                Name="tabitem2"
+                                Height="45"
+                                Margin="0,8,0,0"
+                                Background="{StaticResource DefaultTransientBlackBackground2}"
+                                BorderThickness="2">
+                                <TextBlock
+                                    Margin="15,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="White"
+                                    Text="{Binding MusicCategoryTwo}" />
+                            </controls:HighlightBorder>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <!--  Right side - Info panel + DataGrid  -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Info panel - Music category title  -->
+                    <StackPanel
+                        Name="infoPanel"
+                        Background="{StaticResource HeroTagBackground1Brush}"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Margin="20,15,0,15"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            Foreground="White"
+                            Text="{Binding SelectedMusicTitle}" />
+                        <TextBlock
+                            Name="count"
+                            Margin="20,15,0,15"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            Foreground="White"
+                            Text="{Binding MusicCountText}">
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--  DataGrid with music list and empty state  -->
+                    <Grid Grid.Row="1" Margin="0,10,0,0">
+                        <!--  DataGrid with music list  -->
+                        <DataGrid
+                            Name="datagrid"
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="40"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding MusicList}"
+                            SelectedItem="{Binding SelectedMusicItem}">
+                            <DataGrid.Columns>
+                                <!--  Index Column  -->
+                                <DataGridTemplateColumn
+                                    Width="50"
+                                    Header="鈾?">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Index}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Music Name Column  -->
+                                <DataGridTemplateColumn
+                                    Width="*"
+                                    Header="乐曲名称">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="8,0"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding MusicName}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Artist Column  -->
+                                <DataGridTemplateColumn
+                                    Width="200"
+                                    Header="作者">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Artist}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Like Column  -->
+                                <DataGridTemplateColumn
+                                    Width="60"
+                                    Header="喜欢">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="鈾? "/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--  Duration Column  -->
+                                <DataGridTemplateColumn
+                                    Width="80"
+                                    Header="时长">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Duration}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!--  Empty State Overlay  -->
+                        <Grid Name="grid">
+                            <Grid Height="{Binding ElementName=grid, Path=Bounds.Height}" VerticalAlignment="Top">
+                                <Grid.Background>
+                                    <ImageBrush Source="{StaticResource MusicEmptyStateBackgroundImage}" Stretch="Uniform" />
+                                </Grid.Background>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="24"
+                                    Foreground="White"
+                                    Opacity="0.6"
+                                    Text="空空如也" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <!--  Bottom buttons - Fixed position in right bottom corner  -->
+                    <StackPanel
+                        Grid.Row="2"
+                        Margin="8,10,0,0"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <controls:ToggleButtonComboBox
+                            Name="combobox1"
+                            Width="150"
+                            Height="30"
+                            Margin="10,0,0,0"
+                            ItemsSource="{Binding PlayModeList}"
+                            SelectedIndex="{Binding SelectedPlayModeIndex}" />
+                        <Button
+                            Width="100"
+                            Height="30"
+                            Name="button1"
+                            Content="{Binding SelectedPlayMode}"
+                            IsEnabled="{Binding IsPlayModeButtonEnabled}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!--  Esc Back Control  -->
+        <controls:EscBackControl
+            Margin="0,0,20,20"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnCommand}" />
+    </Grid>
+</bases:UserControlBase>

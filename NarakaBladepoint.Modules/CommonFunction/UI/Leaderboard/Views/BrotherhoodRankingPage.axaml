@@ -1,0 +1,213 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.Views.BrotherhoodRankingPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.35*" />
+        </Grid.ColumnDefinitions>
+        <Grid Margin="0,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <!--  Brotherhood Ranking Tabs  -->
+            <TabControl
+                Grid.Row="0"
+                Margin="8"
+                SelectedIndex="0">
+                <TabItem Header="聚义厅">
+                    <TabItem.Content>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding BrotherhoodList}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="排名">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Image
+                                                    x:Name="image1"
+                                                    Width="30"
+                                                    Height="30">
+                                                </Image>
+                                                <TextBlock
+                                                    Name="textblock"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Rank}">
+                                                </TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="聚义厅">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="段位">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Width="20"
+                                                    Height="20"
+                                                    Margin="0,0,5,0"
+                                                    Source="{StaticResource LeaderboardBrotherhoodRealmImage}"
+                                                    Stretch="Uniform" />
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding RealmName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="积分">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <TextBlock
+                                                    Margin="0,0,5,0"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Score}" />
+                                                <Image
+                                                    Width="20"
+                                                    Height="20"
+                                                    Source="{StaticResource LeaderboardBrotherhoodScoreImage}"
+                                                    Stretch="Uniform" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="个人">
+                    <TabItem.Content>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding BrotherhoodList}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="排名">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Image
+                                                    x:Name="image1"
+                                                    Width="30"
+                                                    Height="30">
+                                                </Image>
+                                                <TextBlock
+                                                    Name="textblock"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Rank}">
+                                                </TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="聚义厅">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="段位">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Width="20"
+                                                    Height="20"
+                                                    Margin="0,0,5,0"
+                                                    Source="{StaticResource LeaderboardBrotherhoodRealmImage}"
+                                                    Stretch="Uniform" />
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding RealmName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="积分">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <TextBlock
+                                                    Margin="0,0,5,0"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Score}" />
+                                                <Image
+                                                    Width="20"
+                                                    Height="20"
+                                                    Source="{StaticResource LeaderboardBrotherhoodScoreImage}"
+                                                    Stretch="Uniform" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Image
+            Grid.Column="1"
+            Source="{StaticResource HeroShowImage}"
+            Stretch="Uniform" />
+    </Grid>
+</views:UserControlBase>

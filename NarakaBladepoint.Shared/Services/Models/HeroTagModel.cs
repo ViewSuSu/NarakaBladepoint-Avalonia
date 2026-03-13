@@ -1,0 +1,24 @@
+﻿using Avalonia.Media;
+using NarakaBladepoint.Framework.Core.Extensions;
+using NarakaBladepoint.Resources;
+
+namespace NarakaBladepoint.Shared.Services.Models
+{
+    public class HeroTagModel
+    {
+        /// <summary>
+        /// 索引
+        /// </summary>
+        public int Index { get; internal set; } = -1;
+
+        /// <summary>
+        /// 英雄名字
+        /// </summary>
+        public string Name => Icon.GetFileName();
+
+        /// <summary>
+        /// 图片
+        /// </summary>
+        public IImage Icon => Index != -1 ? ResourceImageReader.GetHeroTagImage(Index) : null;
+    }
+}

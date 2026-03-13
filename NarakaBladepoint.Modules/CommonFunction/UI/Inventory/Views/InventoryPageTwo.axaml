@@ -1,0 +1,71 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Inventory.Views.InventoryPageTwo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:converters="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Inventory.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Inventory.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Inventory.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <bases:UserControlBase.Resources>
+        <converters:BoolToTransparentBrushConverter x:Key="BoolToTransparentBrushConverter" />
+    </bases:UserControlBase.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.65*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="50,50,0,0">
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="谪星外观" />
+                <ItemsControl
+                    Margin="0,50,0,0"
+                    ItemsSource="{Binding SuitSkins}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5" Rows="8" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="2" EnableMaskOnHover="True">
+                                <Border Background="{StaticResource DefaultTransientBlackBackground2}">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Image
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        Source="{Binding Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+            <Grid Grid.Column="1" Margin="20,100,0,150">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="暂时没有谪星外观" />
+            </Grid>
+        </Grid>
+    </Grid>
+</bases:UserControlBase>

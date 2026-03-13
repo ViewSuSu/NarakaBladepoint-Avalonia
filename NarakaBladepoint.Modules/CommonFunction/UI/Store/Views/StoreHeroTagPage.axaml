@@ -1,0 +1,214 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Store.Views.StoreHeroTagPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Store.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Store.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <views:UserControlBase.Resources>
+        <!--  Hero Tag Info Panel Style  -->
+        
+    </views:UserControlBase.Resources>
+    <Grid Name="grid">
+        <Grid.Background>
+            <ImageBrush Source="{StaticResource StoreHeroTagPageBackground}" />
+        </Grid.Background>
+        <Grid Margin="50,0,50,120">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--  Top header - Diamond info  -->
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <controls:ToggleButtonComboBox
+                    Width="200"
+                    Height="30"
+                    Margin="0,0,15,0"
+                    ItemsSource="{Binding QualityList}"
+                    SelectedIndex="{Binding SelectedQualityIndex}" />
+                <StackPanel
+                    Height="30"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Background="{StaticResource DefaultTransientBlackBackground3}"
+                    Orientation="Horizontal">
+                    <Image Width="30" Source="{StaticResource HuanSiImage}" />
+                    <TextBlock
+                        Margin="0,0,5,0"
+                        VerticalAlignment="Center"
+                        Text="666550" />
+                </StackPanel>
+            </StackPanel>
+
+            <!--  Main content grid  -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--  Left sidebar - Tag list  -->
+                <Grid Name="leftSidebar" Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TabControl
+                        Background="Transparent"
+                        SelectedIndex="{Binding SelectedTagIndex}"
+                        TabStripPlacement="Left">
+                        <controls:ImageTextTabItem
+                            Name="tabitem1"
+                            Width="200"
+                            Height="45"
+                            SelectedBackground="{StaticResource DefaultTransientBlackBackground3}"
+                            ShowMouseOverBorder="True"
+                            ShowSelectedBorder="True"
+                            Text="壹·青空阁">
+                        </controls:ImageTextTabItem>
+                        <controls:ImageTextTabItem
+                            Name="tabitem2"
+                            Height="45"
+                            SelectedBackground="{StaticResource DefaultTransientBlackBackground3}"
+                            ShowMouseOverBorder="True"
+                            ShowSelectedBorder="True"
+                            Text="贰·蓝蔚阁">
+                        </controls:ImageTextTabItem>
+                        <controls:ImageTextTabItem
+                            Name="tabitem3"
+                            Height="45"
+                            SelectedBackground="{StaticResource DefaultTransientBlackBackground3}"
+                            ShowMouseOverBorder="True"
+                            ShowSelectedBorder="True"
+                            Text="叁·碧天阁">
+                        </controls:ImageTextTabItem>
+                        <controls:ImageTextTabItem
+                            Name="tabitem4"
+                            Height="45"
+                            SelectedBackground="{StaticResource DefaultTransientBlackBackground3}"
+                            ShowMouseOverBorder="True"
+                            ShowSelectedBorder="True"
+                            Text="肆·赤霞阁">
+                        </controls:ImageTextTabItem>
+                        <controls:ImageTextTabItem
+                            Name="tabitem5"
+                            Height="45"
+                            SelectedBackground="{StaticResource DefaultTransientBlackBackground3}"
+                            ShowMouseOverBorder="True"
+                            ShowSelectedBorder="True"
+                            Text="伍·橙云阁">
+                        </controls:ImageTextTabItem>
+                        <controls:ImageTextTabItem
+                            Name="tabitem6"
+                            Height="45"
+                            SelectedBackground="{StaticResource DefaultTransientBlackBackground3}"
+                            ShowMouseOverBorder="True"
+                            ShowSelectedBorder="True"
+                            Text="陆·紫冥阁">
+                        </controls:ImageTextTabItem>
+                    </TabControl>
+
+                    <!--  Bottom button - Fixed position  -->
+                    <Button
+                        Grid.Row="1"
+                        Height="30"
+                        Content="前往获取英雄印点数" />
+                </Grid>
+
+                <!--  Right side - Info panel + ItemsControl  -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <!--  Info panel - Aligned with ItemsControl  -->
+                    <Grid Name="infoPanel">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Name="tagImage"
+                                Width="25"
+                                Source="{StaticResource StoreHeroTagIcon1Image}" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                                <TextBlock Text="英雄印点数" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontSize="23"
+                                    Foreground="{StaticResource DefaultOrangeBrush}"
+                                    Text="4075" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="20"
+                                Foreground="White"
+                                Text="{Binding SelectedTagName}" />
+                            <TextBlock
+                                Name="tagUnlockInfoTextBlock"
+                                Grid.Row="1"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Foreground="White">
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+
+                    <!--  ItemsControl  -->
+                    <ItemsControl Grid.Row="1" ItemsSource="{Binding CurrentTagImages}">
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="ItemsControl">
+                                <ScrollViewer Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" Rows="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:HighlightBorder
+                                    Margin="5"
+                                    Background="Gray"
+                                    EnableMaskOnHover="True">
+                                    <Image
+                                        Source="{Binding}"
+                                        Stretch="UniformToFill" />
+                                </controls:HighlightBorder>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</views:UserControlBase>

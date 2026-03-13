@@ -1,0 +1,96 @@
+﻿<base:UserControlBase
+x:Class="NarakaBladepoint.Modules.Social.UI.Setting.Views.SettingPage"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.Social.UI.Setting.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid>
+        <Rectangle Fill="#80000000">
+            <Rectangle.Effect>
+                <BlurEffect Radius="10" />
+            </Rectangle.Effect>
+                <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                        <ia:InvokeCommandAction Command="{Binding ReturnCommand}" />
+                    </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+        </Rectangle>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image
+                Grid.Row="0"
+                Margin="0,50,0,0"
+                Source="{StaticResource LogoImage}"
+                Stretch="Uniform" />
+            <StackPanel
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Command="{Binding ReturnCommand}"
+                    Content="回到游戏" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Command="{Binding NavigateToTutorialCommand}"
+                    Content="战斗百科" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Content="按键设置" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Content="选项设置" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Content="联系客服" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Content="开场视频" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Content="礼物码兑换" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Content="返回登录界面" />
+                <Button
+                    Width="240"
+                    Height="30"
+                    Margin="0,5"
+                    Command="{Binding ExitCommand}"
+                    Content="退至桌面" />
+            </StackPanel>
+                <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                        <ia:InvokeCommandAction Command="{Binding ReturnCommand}" />
+                    </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+        </Grid>
+    </Grid>
+</base:UserControlBase>

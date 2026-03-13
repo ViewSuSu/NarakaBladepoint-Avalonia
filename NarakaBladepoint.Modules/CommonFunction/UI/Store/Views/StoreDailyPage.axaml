@@ -1,0 +1,124 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Store.Views.StoreDailyPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attachedProperties="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Store.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Store.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid Margin="50,30,50,120">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Orientation="Horizontal">
+                <CheckBox
+                    Content="花露商品" />
+            </StackPanel>
+            <StackPanel
+                Grid.Column="1"
+                Margin="0,0,15,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="花露：" />
+                    <Image Width="25" />
+                    <TextBlock />
+                </StackPanel>
+                <StackPanel
+                    Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock Text="英雄币：" />
+                    <Image Width="25" />
+                    <TextBlock />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                Margin="10,5,30,5"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <controls:HighlightBorder
+                    Height="45"
+                    attachedProperties:MouseLeftClickBehavior.Command="{Binding SelectPropCommand}"
+                    Background="{StaticResource DefaultTransientBlackBackground2}"
+                    EnableMaskOnHover="True">
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="道具" />
+                </controls:HighlightBorder>
+                <controls:HighlightBorder
+                    Height="45"
+                    Margin="0,5,0,0"
+                    attachedProperties:MouseLeftClickBehavior.Command="{Binding SelectHuanSiCommand}"
+                    Background="{StaticResource DefaultTransientBlackBackground2}"
+                    EnableMaskOnHover="True">
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="幻丝" />
+                </controls:HighlightBorder>
+                <controls:HighlightBorder
+                    Height="45"
+                    Margin="0,5,0,0"
+                    attachedProperties:MouseLeftClickBehavior.Command="{Binding SelectGiftCommand}"
+                    Background="{StaticResource DefaultTransientBlackBackground2}"
+                    EnableMaskOnHover="True">
+                    <TextBlock
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="赠礼" />
+                </controls:HighlightBorder>
+            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="1">
+
+                <ItemsControl Grid.Column="1" ItemsSource="{Binding CurrentImages}">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder
+                                Margin="5"
+                                Background="Gray"
+                                EnableMaskOnHover="True">
+                                <Image Source="{Binding}" Stretch="UniformToFill" />
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</views:UserControlBase>

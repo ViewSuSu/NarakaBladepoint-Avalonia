@@ -1,0 +1,182 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Hero.Views.HeroListPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Hero.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush Source="{Binding SelectedHeroAvatarModel.ShowImage, Mode=OneWay}" Stretch="UniformToFill" />
+            </Grid.Background>
+        </Grid>
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.SelectedCommand}" CommandParameter="{Binding}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        <Grid Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border
+                    Width="100"
+                    Height="30"
+                    HorizontalAlignment="Left">
+                    <TextBlock VerticalAlignment="Center" Text="英雄币：" />
+                </Border>
+                <ItemsControl
+                    Grid.Row="1"
+                    ItemsSource="{Binding HeroAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="2" EnableMaskOnHover="True">
+                                <Grid>
+                                    <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding Avatar, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                </Grid>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <UniformGrid
+                    Grid.Row="2"
+                    Height="30"
+                    VerticalAlignment="Bottom"
+                    Columns="2">
+                    <Button
+                        Margin="5,0"
+                        Content="外观" />
+                    <Button
+                        Margin="5,0"
+                        Content="易容" />
+                </UniformGrid>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*" />
+                    <RowDefinition Height="0.4*" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <TextBlock
+                        VerticalAlignment="Bottom"
+                        FontSize="30"
+                        Text="{Binding SelectedHeroAvatarModel.Name, Mode=OneWay}" />
+                    <TextBlock
+                        Margin="0,5,0,0"
+                        VerticalAlignment="Bottom">
+                        <Run Text="配音:" />
+                        <Run Text="{Binding SelectedHeroAvatarModel.VoiceActor, Mode=OneWay}" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <StackPanel
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom">
+                        <Image
+                            Width="30"
+                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                            Source="{StaticResource ButtonBaiZeBaiKeImage}" />
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Text="白泽百科" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Image
+                            Width="30"
+                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                            Source="{StaticResource ButtonXiuXingImage}" />
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Text="修行" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Foreground="NavajoWhite"
+                        Text="{Binding SelectedHeroAvatarModel.ShortDescription, Mode=OneWay}" />
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Text="{Binding SelectedHeroAvatarModel.Description, Mode=OneWay}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <UniformGrid
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        Columns="3">
+                        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True" Source="{StaticResource HeroSkillIconImage}" />
+                        <Image
+                            Margin="10,0"
+                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                            Source="{StaticResource HeroSkillF1Image}" />
+                        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True" Source="{StaticResource HeroSkillV1Image}" />
+                    </UniformGrid>
+                    <StackPanel
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" Text="难度" />
+                        <controls:HeroAccessibilityDifficultyUserControl
+                            Margin="5,0,0,0"
+                            Number="{Binding SelectedHeroAvatarModel.HeroAccessibilityDifficulty, Mode=OneWay}" />
+                    </StackPanel>
+                    <Viewbox Width="180">
+                        <controls:HeroRadarUserControl
+                            Grid.Row="2"
+                            Margin="0,10,0,0"
+                            Control="{Binding SelectedHeroAvatarModel.Control, Mode=OneWay}"
+                            Damage="{Binding SelectedHeroAvatarModel.Damage, Mode=OneWay}"
+                            Mobility="{Binding SelectedHeroAvatarModel.Mobility, Mode=OneWay}"
+                            Support="{Binding SelectedHeroAvatarModel.Support, Mode=OneWay}"
+                            Survival="{Binding SelectedHeroAvatarModel.Survival, Mode=OneWay}" />
+                    </Viewbox>
+                    <Button
+                        Height="30"
+                        Content="大厅展示" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnToHallCommand}" />
+    </Grid>
+</base:UserControlBase>

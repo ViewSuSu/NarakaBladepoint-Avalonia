@@ -1,0 +1,246 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.CareerAchievements.Views.CareerAchievementsHeroTagPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.CareerAchievements.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.CareerAchievements.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid Margin="30,100,50,50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.25*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="{StaticResource PersonalInfoDetailsAchievements4Image}" />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="达成该阶段可获得" />
+                <Image Grid.Row="1" Source="{StaticResource PersonalInfoDetailsAchievements3Image}" />
+                <controls:HighlightBorder
+                    Grid.Row="2"
+                    HorizontalAlignment="Center"
+                    EnableMaskOnHover="True">
+                    <Image Source="{StaticResource PersonalInfoDetailsAchievements2Image}" />
+                </controls:HighlightBorder>
+            </Grid>
+            <Button
+                Grid.Row="2"
+                Content="英雄印" />
+        </Grid>
+        <TabControl
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            Background="Transparent">
+            <controls:IconTabItem Header="全部" Icon="avares://NarakaBladepoint.Resources/Image/InventoryProps/logo1.png">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding AllItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+            <controls:IconTabItem Header="个人" Icon="{StaticResource PersonalInfoDetailsAchievementIcon2Image}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding PersonalItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+            <controls:IconTabItem Header="战斗" Icon="{StaticResource PersonalInfoDetailsAchievementIcon3Image}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding CombatItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+            <controls:IconTabItem Header="探索" Icon="{StaticResource PersonalInfoDetailsAchievementIcon4Image}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding ExplorationItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+            <controls:IconTabItem Header="征神之路" Icon="{StaticResource PersonalInfoDetailsAchievementIcon5Image}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding DivineRoadItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+            <controls:IconTabItem Header="娱乐" Icon="{StaticResource PersonalInfoDetailsAchievementIcon6Image}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding EntertainmentItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+            <controls:IconTabItem Header="限定" Icon="{StaticResource PersonalInfoDetailsAchievementIcon7Image}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding LimitedItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:HighlightBorder Margin="0,5,5,0">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding DataContext.SelectItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}" />
+                                    </controls:HighlightBorder>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:IconTabItem>
+        </TabControl>
+    </Grid>
+</views:UserControlBase>

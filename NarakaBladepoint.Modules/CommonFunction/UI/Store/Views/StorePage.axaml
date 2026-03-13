@@ -1,0 +1,86 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Store.Views.StorePage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:topUpContentPage="clr-namespace:NarakaBladepoint.Modules.TopUp.UI.Content.Views"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Store.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Store.Views"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid>
+            <TabControl
+                Background="Transparent"
+                BorderThickness="0">
+                <TabItem
+                    Width="455"
+                    Height="25"
+                    Header=""
+                    IsVisible="False" />
+                <TabItem
+                    Width="35"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="推荐"
+                    IsSelected="True" />
+                <TabItem
+                    Width="35"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="新品" />
+                <TabItem
+                    Width="70"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="限时售卖" />
+                <TabItem
+                    Width="50"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="捆绑包" />
+                <TabItem
+                    Width="70"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="神品发型" />
+                <TabItem
+                    Width="50"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="英雄印">
+                    <views:StoreHeroTagPage />
+                </TabItem>
+                <TabItem
+                    Width="35"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="日常">
+                    <views:StoreDailyPage />
+                </TabItem>
+                <TabItem
+                    Width="35"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="总览">
+                    <views:StoreOverviewPage />
+                </TabItem>
+                <TabItem
+                    Width="35"
+                    Height="25"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="充值">
+                    <topUpContentPage:TopUpContentPage Margin="50,0" />
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnCommand}" />
+    </Grid>
+</base:UserControlBase>

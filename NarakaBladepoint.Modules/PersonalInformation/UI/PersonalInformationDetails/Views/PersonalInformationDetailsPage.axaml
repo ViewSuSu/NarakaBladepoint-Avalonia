@@ -1,0 +1,772 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformationDetails.Views.PersonalInformationDetailsPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformationDetails.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:socialtagUsercontrol="clr-namespace:NarakaBladepoint.Modules.SocialTag.UI.Views"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformationDetails.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="50,80,50,50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#5A000000">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.075*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Height="30"
+                        VerticalAlignment="Top"
+                        Source="{StaticResource PersonalInfoDetails13Image}">
+                            <i:Interaction.Behaviors>
+                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                    <ia:InvokeCommandAction Command="{Binding ChangeMingPianCommand}" />
+                                </ia:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                    </Image>
+                    <StackPanel
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Orientation="Vertical">
+                        <Image
+                            Height="100"
+                            Source="{Binding CurrentUserBasicInformationModel.Avatar, Mode=OneWay}" />
+                        <Image
+                            Width="40"
+                            VerticalAlignment="Bottom"
+                            Source="{StaticResource PersonalInfoDetails5Image}" />
+                    </StackPanel>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition Height="1.5*" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Border Height="30">
+                                <Grid>
+                                    <TextBlock
+                                        Margin="5,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="18"
+                                        Foreground="White"
+                                        Text="{Binding Name, Mode=OneWay}" />
+                                    <Image
+                                        Name="changeGender"
+                                        Width="30"
+                                        HorizontalAlignment="Right"
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        PointerReleased="ChangeGender_MouseLeftButtonUp"
+                                        Source="{StaticResource ClickSettingTagImage}" />
+                                    <Popup
+                                        Name="EditMenuPopup"
+                                        Placement="Right"
+                                        PlacementTarget="{Binding ElementName=changeGender}"
+                                        IsLightDismissEnabled="False"
+                                        VerticalOffset="0">
+                                        <Border
+                                            Background="#2C2C2C"
+                                            BorderBrush="#CCCCCC"
+                                            BorderThickness="0.5">
+                                            <StackPanel Margin="0" Orientation="Vertical">
+                                                <Border Padding="15,10">
+                                                    <TextBlock
+                                                        VerticalAlignment="Center"
+                                                        Foreground="White"
+                                                        Text="编辑名称" />
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerReleased">
+                                                                    <ia:InvokeCommandAction Command="{Binding EditNameCommand}" />
+                                                                    <ia:ChangePropertyAction
+                                                                        PropertyName="IsOpen"
+                                                                        TargetObject="{Binding ElementName=EditMenuPopup}"
+                                                                        Value="False" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                </Border>
+                                                <Separator Background="#444444" />
+                                                <Border Padding="15,10">
+                                                    <TextBlock
+                                                        VerticalAlignment="Center"
+                                                        Foreground="White"
+                                                        Text="修改性别" />
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerReleased">
+                                                                    <ia:InvokeCommandAction Command="{Binding EditGenderCommand}" />
+                                                                    <ia:ChangePropertyAction
+                                                                        PropertyName="IsOpen"
+                                                                        TargetObject="{Binding ElementName=EditMenuPopup}"
+                                                                        Value="False" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                            <Grid Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    Text="未加入聚义厅" />
+                                <StackPanel
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <Image
+                                        Width="20"
+                                        HorizontalAlignment="Right"
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        Source="{StaticResource PersonalInfoDetails9Image}" />
+                                    <Image
+                                        Width="20"
+                                        Margin="5,0,0,0"
+                                        HorizontalAlignment="Right"
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        Source="{StaticResource PersonalInfoDetails10Image}">
+                                            <i:Interaction.Behaviors>
+                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                    <ia:InvokeCommandAction Command="{Binding CopyUserIdCommand}" />
+                                                </ia:EventTriggerBehavior>
+                                            </i:Interaction.Behaviors>
+                                    </Image>
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="ID:" />
+                                        <Run Text="{Binding CurrentUserBasicInformationModel.Id, Mode=OneWay}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid>
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                        <ia:InvokeCommandAction Command="{Binding ChoseTitleTagCommand}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Border Height="30" Background="#5A000000">
+                                <Grid Margin="5,0">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="未选择称号" />
+                                    <Image
+                                        Width="20"
+                                        HorizontalAlignment="Right"
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        Source="{StaticResource PersonalInfoDetails12Image}" />
+                                </Grid>
+                            </Border>
+                            <Grid Grid.Column="1" VerticalAlignment="Center">
+                                <StackPanel
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <Image
+                                        Width="20"
+                                        HorizontalAlignment="Right"
+                                        Source="{StaticResource PersonalInfoDetails6Image}" />
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="{Binding CurrentUserBasicInformationModel.Credits, Mode=OneWay}" />
+                                    <Image
+                                        Width="20"
+                                        Margin="5,0,0,0"
+                                        HorizontalAlignment="Right"
+                                        Source="{StaticResource PersonalInfoDetails8Image}" />
+
+                                    <Image
+                                        Width="20"
+                                        Margin="30,0,0,0"
+                                        HorizontalAlignment="Right"
+                                        Source="{StaticResource PersonalInfoDetails7Image}" />
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="{Binding CurrentUserBasicInformationModel.ActiveValue}" />
+                                    <Image
+                                        Width="20"
+                                        Margin="5,0,0,0"
+                                        HorizontalAlignment="Right"
+                                        Source="{StaticResource PersonalInfoDetails8Image}" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                        <Border
+                            Grid.Row="2"
+                            Height="30"
+                            Background="#5A000000">
+                            <Grid>
+                                <socialtagUsercontrol:TagUserControl
+                                    Height="20"
+                                    IsVisible="{Binding IsHaveTags, Mode=OneWay}" />
+                                <TextBlock
+                                    Margin="5,0"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    Text="点击装配标签"
+                                    IsVisible="{Binding IsHaveTags, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding ChangeTagCommand}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                </TextBlock>
+                                <Image
+                                    Height="25"
+                                    HorizontalAlignment="Right"
+                                    Source="{StaticResource ClickSettingTagImage}">
+                                        <i:Interaction.Behaviors>
+                                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                <ia:InvokeCommandAction Command="{Binding ChangeTagCommand}" />
+                                            </ia:EventTriggerBehavior>
+                                        </i:Interaction.Behaviors>
+                                </Image>
+                            </Grid>
+                        </Border>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+                            <ItemsControl
+                                Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                ItemsSource="{Binding SelectedHeroTagModels}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="10" Rows="1" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:HighlightBorder
+                                            Margin="0,0,2,0">
+                                            <controls:HighlightBorder.Background>
+                                                <ImageBrush Source="{StaticResource PersonalInfoDetails19Image}" Stretch="UniformToFill" />
+                                            </controls:HighlightBorder.Background>
+                                            <Image Source="{Binding Icon, Mode=OneWay}" Stretch="Uniform" />
+                                                <i:Interaction.Behaviors>
+                                                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                        <ia:InvokeCommandAction Command="{Binding DataContext.HeroTagCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" />
+                                                    </ia:EventTriggerBehavior>
+                                                </i:Interaction.Behaviors>
+                                        </controls:HighlightBorder>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Image
+                                Grid.Column="1"
+                                Width="20"
+                                Height="20"
+                                Margin="0,0,5,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Source="{StaticResource PersonalInfoDetails12Image}"
+                                Stretch="UniformToFill">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.HeroTagCommand, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                            </Image>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Background="#1A000000">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.7*" />
+                        <RowDefinition Height="0.45*" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Image Source="{StaticResource PersonalInfoDetails1Image}" Stretch="Uniform" />
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="#EAB181"
+                                    Text="总收藏值 "/>
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontSize="18"
+                                    Foreground="#EAB181"
+                                    Text="{Binding CurrentUserBasicInformationModel.TotalFavorites}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <UniformGrid Grid.Row="1" Columns="3">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    Text="461" />
+                                <TextBlock
+                                    Foreground="White"
+                                    Text="{Binding CurrentUserBasicInformationModel.LoginDays}" />
+                            </StackPanel>
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    Text="{Binding CurrentUserBasicInformationModel.HeroSkins}" />
+                                <TextBlock Foreground="White" Text="英雄外观" />
+                            </StackPanel>
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    Foreground="White"
+                                    Text="{Binding CurrentUserBasicInformationModel.WeaponSkins}" />
+                                <TextBlock Foreground="White" Text="武器外观" />
+                            </StackPanel>
+                        </UniformGrid>
+                    </Grid>
+                    <UniformGrid Grid.Row="1" Columns="3">
+                        <Grid>
+                            <Image Source="{StaticResource PersonalInfoDetailsHero1Image}" Stretch="Uniform" />
+                            <Image
+                                Height="30"
+                                Margin="0,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Source="{StaticResource PersonalInfoDetails14Image}"
+                                Stretch="Uniform" />
+                        </Grid>
+                        <Grid>
+                            <Image Source="{StaticResource PersonalInfoDetailsHero2Image}" Stretch="Uniform" />
+                            <Image
+                                Height="30"
+                                Margin="0,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Source="{StaticResource PersonalInfoDetails15Image}"
+                                Stretch="Uniform" />
+                        </Grid>
+                        <Grid>
+                            <Image Source="{StaticResource PersonalInfoDetailsHero3Image}" Stretch="Uniform" />
+                            <Image
+                                Height="30"
+                                Margin="0,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Source="{StaticResource PersonalInfoDetails16Image}"
+                                Stretch="Uniform" />
+                        </Grid>
+                    </UniformGrid>
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel
+                            Grid.Row="2"
+                            Background="Transparent"
+                            Orientation="Vertical">
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid.Background>
+                                    <ImageBrush Source="{StaticResource PersonalInfoDetailsListBoxItemBackgroundImage}" Stretch="Fill" />
+                                </Grid.Background>
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="排位赛 "/>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.RankedMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="无尽试炼" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.EndlessTrialMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  快速比赛 -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="快速比赛 "/>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.QuickMatchMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  暗域狂潮  -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="暗域狂潮" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.DarkDomainMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  人机试炼  -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="人机试炼" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.PvEMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  地脉之战  -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="地脉之战" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.LeyLineWarMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  征神之路  -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="征神之路" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.JourneyToGodMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  六芒劫 -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="六芒劫 "/>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.HexagramCalamityMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  无间镖客  -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="无间镖客" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.InfiniteEscortMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+
+                            <!--  四煞劫 -->
+                            <Grid
+                                Height="25"
+                                Margin="0,5"
+                                HorizontalAlignment="Stretch">
+                                <Grid Margin="5,0" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="四煞劫 "/>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Foreground="White">
+                                        <Run Text="{Binding SelectedItem.FourFiendsCalamityMatches}" />
+                                        <Run Text="场 "/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+                <Grid Grid.Column="1" Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Background="#3A000000">
+                        <controls:ToggleButtonComboBox
+                            Grid.Row="0"
+                            Width="100"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding PersonalSeasonDataModels}"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                        <StackPanel
+                            Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Text="排位赛 "/>
+                            <Border
+                                Width="25"
+                                Height="25"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="#5A000000">
+                                <Image
+                                    Grid.Column="1"
+                                    Width="20"
+                                    Height="20"
+                                    Source="{StaticResource PersonalInfoDetails12Image}"
+                                    Stretch="UniformToFill" />
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <UniformGrid Grid.Row="1" Columns="3">
+                        <Border Margin="0,5" Background="#1A000000">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image
+                                    Width="30"
+                                    Source="{StaticResource PersonalInfoDetails2Image}"
+                                    Stretch="Uniform" />
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                                    <TextBlock Foreground="White" Text="游戏时间" />
+                                    <TextBlock HorizontalAlignment="Center" Foreground="White">
+                                        <Run Text="{Binding SelectedItem.GameTime}" />
+                                        <Run />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="5" Background="#1A000000">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image
+                                    Width="30"
+                                    Source="{StaticResource PersonalInfoDetails3Image}"
+                                    Stretch="Uniform" />
+                                <StackPanel
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                                    <TextBlock Foreground="White" Text="总场次 "/>
+                                    <TextBlock HorizontalAlignment="Center" Foreground="White">
+                                        <Run Text="{Binding SelectedItem.TotalMatches}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="5,5,0,5" Background="#1A000000">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image
+                                    Width="30"
+                                    Source="{StaticResource PersonalInfoDetails4Image}"
+                                    Stretch="Uniform" />
+                                <StackPanel
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                                    <TextBlock Foreground="White" Text="总击败 "/>
+                                    <TextBlock HorizontalAlignment="Center" Foreground="White">
+                                        <Run Text="{Binding SelectedItem.TotalDefeats}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                    <Image
+                        Grid.Row="2"
+                        VerticalAlignment="Top"
+                        Source="{StaticResource PersonalInfoDetails18Image}"
+                        Stretch="Uniform" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Image Source="{StaticResource HeroShowImage}" Stretch="UniformToFill" />
+        </Grid>
+    </Grid>
+</bases:UserControlBase>

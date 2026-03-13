@@ -1,0 +1,273 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.HistoryMatchRecordDetail.Views.HistoryMatchRecordDetailPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:converters="clr-namespace:NarakaBladepoint.Framework.UI.Converters;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.HistoryMatchRecordDetail.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.HistoryMatchRecordDetail.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid.Resources>
+            <converters:ImageSourceToFileNameConverter x:Key="ImageSourceToFileNameConverter" />
+            <converters:InverseBoolToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+        </Grid.Resources>
+        <Grid Name="grid" Margin="30,80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1.25*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="1.5*" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Image Source="{StaticResource HistoryMatchDetailsRecord1Image}" Stretch="Fill" />
+                        <Image
+                            Width="100"
+                            Height="20"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
+                    </Grid>
+                    <ItemsControl
+                        Name="itemControl"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding CurrentUserImageSouces}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel
+                                    Margin="5,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <Border>
+                                        <Image
+                                            Width="50"
+                                            Source="{Binding}"
+                                            Stretch="UniformToFill" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="0,5,0,0"
+                                        Foreground="White"
+                                        Text="{Binding Path=., Converter={StaticResource ImageSourceToFileNameConverter}}"
+                                        TextAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Image Source="{StaticResource HistoryMatchDetailsRecord2Image}" />
+                </Grid>
+            </Grid>
+            <DataGrid
+                Grid.Row="1"
+                AutoGenerateColumns="False"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                BorderThickness="0"
+                GridLinesVisibility="None"
+                HeadersVisibility="Column"
+                IsEnabled="False"
+                ItemsSource="{Binding MatchRecords}"
+                SelectedIndex="{Binding SelectedIndex}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="Auto" Header="英雄">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Grid.Column="0"
+                                    Source="{Binding Avatar}"
+                                    Stretch="Uniform" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*" Header="玩家">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <UniformGrid
+                                    Grid.Column="1"
+                                    Margin="5"
+                                    Rows="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Text="{Binding Name}"
+                                        TextAlignment="Left" />
+                                    <ItemsControl
+                                        VerticalAlignment="Bottom"
+                                        ItemsSource="{Binding Titles}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Image
+                                                    Margin="0,0,5,0"
+                                                    Source="{Binding}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </UniformGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--  生存时间列 -->
+                    <DataGridTemplateColumn Width="100" Header="生存时间">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="{Binding SurvivalTime}"
+                                    TextAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="80" Header="击败">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="{Binding TeamKills}"
+                                    TextAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="80" Header="助攻">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="{Binding TeamKills}"
+                                    TextAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--  总伤害列  -->
+                    <DataGridTemplateColumn Width="100" Header="伤害">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="{Binding TotalDamage}"
+                                    TextAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--  总治疗量列 -->
+                    <DataGridTemplateColumn Width="100" Header="总治">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="{Binding TotalHealing}"
+                                    TextAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--  救援次数  -->
+                    <DataGridTemplateColumn Width="100" Header="救援">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="{Binding AwardedTeams}"
+                                    TextAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <!--  操作列 -->
+                    <DataGridTemplateColumn Width="80" Header="">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    IsVisible="{Binding IsCurrentUser, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                                    <Image
+                                        Width="24"
+                                        Height="24"
+                                        Margin="3,0"
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        Source="{StaticResource HistoryMatchDetailsRecord3Image}"
+                                        Stretch="Uniform">
+                                            <i:Interaction.Behaviors>
+                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.AddFriendCommand}" CommandParameter="{Binding}" />
+                                                </ia:EventTriggerBehavior>
+                                            </i:Interaction.Behaviors>
+                                    </Image>
+                                    <Image
+                                        Width="24"
+                                        Margin="3,0"
+                                        attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                        Source="{StaticResource HistoryMatchDetailsRecord4Image}"
+                                        Stretch="Uniform">
+                                            <i:Interaction.Behaviors>
+                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ReportCommand}" CommandParameter="{Binding}" />
+                                                </ia:EventTriggerBehavior>
+                                            </i:Interaction.Behaviors>
+                                    </Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnCommand}" />
+    </Grid>
+</bases:UserControlBase>
+
+

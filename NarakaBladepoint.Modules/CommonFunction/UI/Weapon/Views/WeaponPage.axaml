@@ -1,0 +1,364 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Weapon.Views.WeaponPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:converters="clr-namespace:NarakaBladepoint.Framework.UI.Converters;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Weapon.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Weapon.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BoolToTransparentBrushConverter x:Key="BoolToTransparentBrushConverter" />
+    </UserControl.Resources>
+    <Grid Background="{StaticResource Background2}">
+        <Grid Name="weaponBackgroundGrid">
+            <Grid.Background>
+                <ImageBrush
+                    Source="{Binding SelectedWeapon.Background, Mode=OneWay}"
+                    Stretch="UniformToFill" />
+            </Grid.Background>
+        </Grid>
+        <Grid Margin="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+                <TabControl
+                    x:Name="weaponTabControl"
+                    Background="Transparent">
+                    <TabItem
+                        x:Name="rangedTabItem"
+                        Header="远程">
+                        <ItemsControl
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            ItemsSource="{Binding RangedWeaponModels, Mode=OneWay}"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="ItemsControl">
+                                    <ScrollViewer Padding="{TemplateBinding Padding}">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="1" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:HighlightBorder
+                                        Width="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=Bounds.Width}"
+                                        Height="100"
+                                        Margin="0,5"
+                                        Background="#1A000000"
+                                        BorderThickness="0"
+                                        EnableMaskOnHover="True">
+                                        <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                            <i:Interaction.Behaviors>
+                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectWeaponCommand}" CommandParameter="{Binding}" />
+                                                </ia:EventTriggerBehavior>
+                                            </i:Interaction.Behaviors>
+                                            <Grid Margin="5">
+                                                <Image
+                                                    Source="{Binding Icon, Mode=OneWay}"
+                                                    Stretch="UniformToFill" />
+                                                <TextBlock
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Foreground="White"
+                                                    Text="{Binding Name, Mode=OneWay}" />
+                                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                                                    <StackPanel
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Orientation="Horizontal">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Bottom"
+                                                            Foreground="Orange"
+                                                            Text="等级" />
+                                                        <TextBlock
+                                                            Margin="5,0,0,0"
+                                                            VerticalAlignment="Bottom"
+                                                            FontSize="15"
+                                                            Foreground="Orange"
+                                                            Text="{Binding Level, Mode=OneWay}" />
+                                                    </StackPanel>
+                                                    <ProgressBar Height="6" Margin="0,3,0,0" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </controls:HighlightBorder>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </TabItem>
+                    <TabItem
+                        x:Name="meleeTabItem"
+                        Header="近战">
+                        <ItemsControl
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            ItemsSource="{Binding MeleeWeaponModels, Mode=OneWay}"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="ItemsControl">
+                                    <ScrollViewer Padding="{TemplateBinding Padding}">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock
+                                            Foreground="White"
+                                            Text="{Binding Group, Mode=OneWay}" />
+                                        <ItemsControl
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            ItemsSource="{Binding MeleeWeaponDatas, Mode=OneWay}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Vertical" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <controls:HighlightBorder
+                                                        Width="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=Bounds.Width}"
+                                                        Height="100"
+                                                        Margin="0,2"
+                                                        Background="#1A000000"
+                                                        BorderThickness="0"
+                                                        EnableMaskOnHover="True">
+                                                        <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                                            <i:Interaction.Behaviors>
+                                                                <ia:EventTriggerBehavior EventName="PointerPressed">
+                                                                    <ia:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.SelectWeaponCommand}" CommandParameter="{Binding}" />
+                                                                </ia:EventTriggerBehavior>
+                                                            </i:Interaction.Behaviors>
+                                                            <Grid Margin="5">
+                                                                <Image
+                                                                    Source="{Binding Icon, Mode=OneWay}"
+                                                                    Stretch="UniformToFill" />
+                                                                <TextBlock
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Top"
+                                                                    Foreground="White"
+                                                                    Text="{Binding Name, Mode=OneWay}" />
+                                                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                                                                    <StackPanel
+                                                                        HorizontalAlignment="Left"
+                                                                        VerticalAlignment="Center"
+                                                                        Orientation="Horizontal">
+                                                                        <TextBlock
+                                                                            HorizontalAlignment="Left"
+                                                                            VerticalAlignment="Bottom"
+                                                                            Foreground="Orange"
+                                                                            Text="等级" />
+                                                                        <TextBlock
+                                                                            Margin="5,0,0,0"
+                                                                            VerticalAlignment="Bottom"
+                                                                            FontSize="15"
+                                                                            Foreground="Orange"
+                                                                            Text="{Binding Level, Mode=OneWay}" />
+                                                                    </StackPanel>
+                                                                    <ProgressBar Height="6" Margin="0,3,0,0" />
+                                                                </StackPanel>
+                                                            </Grid>
+                                                        </Border>
+                                                    </controls:HighlightBorder>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </TabItem>
+                </TabControl>
+                <Button
+                    Grid.Row="1"
+                    Height="30"
+                    VerticalAlignment="Bottom"
+                    Content="外观" />
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <Grid
+                        Width="80"
+                        Height="80"
+                        Margin="30,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                        <Grid.Background>
+                            <ImageBrush Source="{StaticResource WeaponLevelImage}" Stretch="UniformToFill" />
+                        </Grid.Background>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            FontSize="10"
+                            Foreground="White">
+                            <Run Text="等级" />
+                            <Run Text="{Binding SelectedWeapon.Level, Mode=OneWay}" />
+                        </TextBlock>
+                    </Grid>
+                    <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+                        <TextBlock
+                            FontSize="30"
+                            Text="{Binding SelectedWeapon.Name, Mode=OneWay}" />
+                        <ItemsControl
+                            x:Name="weaponImagesItemsControl"
+                            Margin="0,5,0,0"
+                            ItemsSource="{Binding SelectedWeapon.SkillImages, Mode=OneWay}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
+                                        Width="50"
+                                        Height="50"
+                                        Margin="2">
+                                        <Polygon
+                                            Fill="#1A000000"
+                                            Points="20,0 30,0 50,20 50,30 30,50 20,50 0,30 0,20"
+                                            Stroke="#5A6A7A"
+                                            StrokeThickness="1" />
+                                        <Image
+                                            Width="50"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding}"
+                                            Stretch="Uniform" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid
+                x:Name="lastGrid"
+                Grid.Column="2"
+                Margin="0,50">
+                <!--  武器统计数据  -->
+                <Grid Margin="0,10,0,0" VerticalAlignment="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!--  总伤害 -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5">
+                        <TextBlock Foreground="Gray" Text="总伤害 "/>
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.TotalDamage, Mode=OneWay}" />
+                    </StackPanel>
+                    <!--  总击败 -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5">
+                        <TextBlock Foreground="Gray" Text="总击败 "/>
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.TotalEliminations, Mode=OneWay}" />
+                    </StackPanel>
+                    <!--  总助攻 -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="5">
+                        <TextBlock Foreground="Gray" Text="总助攻 "/>
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.TotalAssists, Mode=OneWay}" />
+                    </StackPanel>
+                    <!--  单场最高伤害 -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="5">
+                        <TextBlock Foreground="Gray" Text="单场最高伤害 "/>
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.MaxDamagePerGame, Mode=OneWay}" />
+                    </StackPanel>
+                    <!--  单场最高击败 -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5">
+                        <TextBlock Foreground="Gray" Text="单场最高击败 "/>
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.MaxEliminationsPerGame, Mode=OneWay}" />
+                    </StackPanel>
+                    <!--  命中头部 (远程武器)  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="5"
+                        IsVisible="{Binding IsSelected, ElementName=rangedTabItem}">
+                        <TextBlock Foreground="Gray" Text="命中头部" />
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.Headshots, Mode=OneWay}" />
+                    </StackPanel>
+                    <!--  总振刀数(近战武器)  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="5"
+                        IsVisible="{Binding IsSelected, ElementName=meleeTabItem}">
+                        <TextBlock Foreground="Gray" Text="总振刀数 "/>
+                        <TextBlock
+                            FontSize="15"
+                            Text="{Binding SelectedWeapon.TotalParries, Mode=OneWay}" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnToHallCommand}" />
+    </Grid>
+</bases:UserControlBase>

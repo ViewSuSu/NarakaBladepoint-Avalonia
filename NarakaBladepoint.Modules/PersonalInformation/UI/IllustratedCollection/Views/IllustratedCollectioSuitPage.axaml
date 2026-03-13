@@ -1,0 +1,106 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.IllustratedCollection.Views.IllustratedCollectioSuitPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:conv="clr-namespace:NarakaBladepoint.Framework.UI.Converters;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.IllustratedCollection.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.IllustratedCollection.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Margin="50,100">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Margin="0,0,10,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center">
+            <TextBlock>
+                <Run Text="总计加分:" />
+                <Run Foreground="{StaticResource DefaultOrangeBrush}" Text="6700" />
+            </TextBlock>
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl
+                Name="itemcontrol"
+                ItemsSource="{Binding SuitCollections}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,10" Background="{StaticResource DefaultTransientBlackBackground3}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Image
+                                    Name="image"
+                                    Height="130"
+                                    Source="{Binding CoverImage}"
+                                    Stretch="UniformToFill" />
+                            </Grid>
+                            <Grid
+                                Grid.Column="1"
+                                Margin="20,0,30,0"
+                                VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    FontSize="14"
+                                    Text="{Binding Name}" />
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Margin="0,5,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Orientation="Vertical">
+                                    <TextBlock>
+                                        <Run Text="收集进度：" />
+                                        <Run
+                                            Foreground="{StaticResource DefaultHighlightBackground}"
+                                            Text="{Binding ProgressbarValue}" />
+                                        <Run Foreground="{StaticResource DefaultHighlightBackground}" Text="/" />
+                                        <Run
+                                            Foreground="{StaticResource DefaultHighlightBackground}"
+                                            Text="{Binding ProgressbarMaximum}" />
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="累计加分：" />
+                                        <Run
+                                            Foreground="{StaticResource DefaultHighlightBackground}"
+                                            Text="{Binding ScoreText}" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <Button
+                                    Grid.Row="2"
+                                    Height="30"
+                                    Margin="0,10,0,0"
+                                    Command="{Binding ViewDetailsCommand}"
+                                    Content="查看详情" />
+                                <Grid Grid.Row="3" Margin="0,10,0,0" />
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <controls:RewardItemsControl
+                                    ItemsSource="{Binding Rewards}"
+                                    ProgressbarMaximum="{Binding ProgressbarMaximum}"
+                                    ProgressbarValue="{Binding ProgressbarValue}" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</views:UserControlBase>

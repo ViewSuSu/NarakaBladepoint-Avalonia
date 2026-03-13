@@ -1,0 +1,72 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.Views.LeaderboardPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid>
+            <TabControl attach:TabControlContentMarginAttachedProperty.IsAutoAdjustContentMargin="True">
+                <TabItem
+                    Width="300"
+                    Header=""
+                    IsVisible="False" />
+                <TabItem
+                    Width="80"
+                    Height="30"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="排行榜"
+                    IsSelected="True">
+                    <local:LeaderboardContentPage />
+                </TabItem>
+                <TabItem
+                    Width="80"
+                    Height="30"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="收藏榜">
+                    <local:CollectionScoreRankingPage />
+                </TabItem>
+                <TabItem
+                    Width="80"
+                    Height="30"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="聚义榜">
+                    <local:BrotherhoodRankingPage />
+                </TabItem>
+                <TabItem
+                    Width="80"
+                    Height="30"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="英雄榜">
+                    <local:HeroLeaderboardPage />
+                </TabItem>
+                <TabItem
+                    Width="80"
+                    Height="30"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="高校榜">
+                    <local:UniversityLeaderboard />
+                </TabItem>
+                <TabItem
+                    Width="80"
+                    Height="30"
+                    Background="{StaticResource DefaultTransientBlackBackground5}"
+                    Header="赛事冠军">
+                    <local:TournamentChampionPage />
+                </TabItem>
+            </TabControl>
+            <controls:EscBackControl
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding ReturnToHallCommand}" />
+        </Grid>
+    </Grid>
+</base:UserControlBase>

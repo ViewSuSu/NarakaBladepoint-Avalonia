@@ -1,0 +1,85 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformation.Views.PersonalInformationPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.PersonalInformation.ViewModels"
+    d:DesignHeight="150"
+    d:DesignWidth="210"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <base:UserControlBase.Styles>
+        <StyleInclude Source="avares://NarakaBladepoint.Controls/Themes/DefaultStyle.axaml" />
+    </base:UserControlBase.Styles>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="0"
+            Margin="0,5"
+            Background="#5A000000" />
+        <Border
+            Grid.Row="1"
+            Margin="0,5"
+            Background="#5A000000" />
+        <Grid
+            Grid.Row="2"
+            Margin="0,5"
+            Background="#5A000000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderThickness="1">
+                <controls:AvatarControl
+                    BackgroundImage="{Binding UserInfoModel.Avatar, Mode=OneWay}"
+                    CornerLength="10"
+                    CornerThickness="2"
+                    FontSize="7"
+                    ImageStretch="Fill"
+                    Value="425" />
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed">
+                                <ia:InvokeCommandAction Command="{Binding NavigateToPersonalInfomationCommand}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+            </Border>
+            <Grid Grid.Column="1" Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Border
+                        Width="15"
+                        Height="15"
+                        Background="Green"
+                        CornerRadius="10">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            Foreground="White"
+                            Text="1" />
+                    </Border>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Text="{Binding Name, Mode=OneWay}" />
+                </StackPanel>
+                <!--<ProgressBar
+             Grid.Row="1"
+             Grid.Column="1"
+             Height="10"
+             Background="DimGray"
+             Foreground="#EAB181" />-->
+            </Grid>
+        </Grid>
+    </Grid>
+</base:UserControlBase>

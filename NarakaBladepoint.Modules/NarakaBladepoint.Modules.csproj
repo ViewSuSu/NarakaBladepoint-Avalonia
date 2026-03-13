@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NoWarn>$(NoWarn);CS8601;CS8603;CS8618</NoWarn>
+		<Authors>小窗同学</Authors>
+		<LangVersion>latest</LangVersion>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="CommonFunction\UI\Store\Converters\**" />
+	  <None Remove="CommonFunction\UI\Store\Converters\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="CommonFunction\UI\Inventory\ViewModels\InventoryPageViewModel.cs~RF1b11ff1.TMP" />
+	  <None Remove="PersonalInformation\UI\CareerAchievements\Views\0xp5bx2m.zyw~" />
+	</ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Avalonia.Controls.DataGrid" Version="11.1.0" />
+	<PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\NarakaBladepoint.Shared\NarakaBladepoint.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Folder Include="BattlePass\UI\BattlePass\Converters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CommonFunction\UI\CommonFunction\Views\CommonFunctionPage.axaml.cs">
+      <DependentUpon>CommonFunctionPage.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

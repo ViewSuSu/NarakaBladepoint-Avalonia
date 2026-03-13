@@ -1,0 +1,343 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.Views.LeaderboardContentPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.Leaderboard.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.35*" />
+        </Grid.ColumnDefinitions>
+        <Grid Margin="0,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <!--  Mode tabs  -->
+            <TabControl
+                Grid.Row="0"
+                Margin="8"
+                SelectedIndex="0">
+                <TabItem Header="单人模式">
+                    <TabItem.Content>
+                        <DataGrid
+                            Name="datagrid1"
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PlayersSolo}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="排名">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Image
+                                                    x:Name="image1"
+                                                    Width="30"
+                                                    Height="30">
+                                                </Image>
+                                                <TextBlock
+                                                    Name="textblock"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Rank}">
+                                                </TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="斗士">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Name="image2"
+                                                    Width="40"
+                                                    Height="40"
+                                                    Source="{Binding Avatar}"
+                                                    Stretch="UniformToFill" />
+                                                <TextBlock
+                                                    Margin="8,0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="{Binding Name}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="境界">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    x:Name="image3"
+                                                    Width="30"
+                                                    Height="30"
+                                                    Stretch="Uniform">
+                                                </Image>
+                                                <TextBlock
+                                                    Margin="8,0"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding RealmName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="120" Header="总积分">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Score}"
+                                                TextAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="120" Header="游戏场次">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Matches}"
+                                                TextAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="双人模式">
+                    <TabItem.Content>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PlayersDuo}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="排名">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Image
+                                                    x:Name="image1"
+                                                    Width="30"
+                                                    Height="30">
+                                                </Image>
+                                                <TextBlock
+                                                    Name="textblock"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Rank}">
+                                                </TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="斗士">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Name="image2"
+                                                    Width="40"
+                                                    Height="40"
+                                                    Source="{Binding Avatar}"
+                                                    Stretch="UniformToFill" />
+                                                <TextBlock
+                                                    Margin="8,0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="{Binding Name}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="境界">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Width="30"
+                                                    Height="30"
+                                                    Stretch="Uniform">
+                                                </Image>
+                                                <TextBlock
+                                                    Margin="8,0"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding RealmName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="120" Header="总积分">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Score}"
+                                                TextAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="120" Header="游戏场次">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Matches}"
+                                                TextAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="三人模式">
+                    <TabItem.Content>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PlayersTrio}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="排名">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Image
+                                                    x:Name="image1"
+                                                    Width="30"
+                                                    Height="30">
+                                                </Image>
+                                                <TextBlock
+                                                    Name="textblock"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding Rank}">
+                                                </TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="斗士">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Name="image2"
+                                                    Width="40"
+                                                    Height="40"
+                                                    Source="{Binding Avatar}"
+                                                    Stretch="UniformToFill" />
+                                                <TextBlock
+                                                    Margin="8,0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="{Binding Name}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" Header="境界">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Margin="8,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                                <Image
+                                                    Width="30"
+                                                    Height="30"
+                                                    Stretch="Uniform">
+                                                </Image>
+                                                <TextBlock
+                                                    Margin="8,0"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="White"
+                                                    Text="{Binding RealmName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="120" Header="总积分">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Score}"
+                                                TextAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="120" Header="游戏场次">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Text="{Binding Matches}"
+                                                TextAlignment="Center" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Image
+            Grid.Column="1"
+            Source="{StaticResource HeroShowImage}"
+            Stretch="Uniform" />
+    </Grid>
+</views:UserControlBase>

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net8.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+   <LangVersion>latest</LangVersion>
+   <Authors>小窗同学</Authors>
+   <NoWarn>$(NoWarn);CS8601;CS8603;CS8618</NoWarn>
+   <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\NarakaBladepoint.Resources\NarakaBladepoint.Resources.csproj" />
+  </ItemGroup>
+
+</Project>

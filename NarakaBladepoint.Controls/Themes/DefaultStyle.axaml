@@ -1,0 +1,32 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="using:NarakaBladepoint.Framework.UI.Converters">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ImageSourceStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/BrushStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ExpandStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ButtonStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/TabItemStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/TabControlStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ImageStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/CustonControlStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ComboboxStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/CheckBoxStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ComboboxItemStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/RadioButtonStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ScrollViewerStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/TextBoxStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/DataGridStyle.axaml" />
+                <ResourceInclude Source="avares://NarakaBladepoint.Controls/Themes/ListBoxStyle.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:BoolToTransparentBrushConverter x:Key="BoolToWhiteBrushConverter" />
+            <converters:ImageSourceToFileNameConverter x:Key="ImageSourceToFileNameConverter" />
+            <converters:StringToIntConverter x:Key="StringToIntConverter" />
+        </ResourceDictionary>
+    </Styles.Resources>
+    <StyleInclude Source="avares://NarakaBladepoint.Controls/Themes/TextBlackStyle.axaml" />
+</Styles>

@@ -1,0 +1,38 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.Wealth.UI.Main.Views.WealthPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.Wealth.UI.Main.ViewModels"
+    d:DesignHeight="50"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UniformGrid Grid.Column="2" Columns="3">
+        <controls:IconTextBlockCustomControl
+            Icon="{StaticResource AncientCoinsImage}"
+            Spacing="-5"
+            Text="{Binding CurrentUserModel.AncientCoins}" />
+        <Grid x:Name="GoldBrickPopup">
+            <controls:IconTextBlockCustomControl
+                Command="{Binding NavigateToTopUpCommand}"
+                Icon="{StaticResource GoldBrickImage}"
+                Spacing="-5"
+                Text="{Binding CurrentUserModel.GoldBrick}" />
+        </Grid>
+        <Popup
+            HorizontalOffset="-10"
+            IsOpen="{Binding ElementName=GoldBrickPopup, Path=IsMouseOver, Mode=OneWay}"
+            Placement="Bottom"
+            PlacementTarget="{Binding ElementName=GoldBrickControl}"
+            IsLightDismissEnabled="False">
+            <Image Source="{StaticResource Wealth1Image}" />
+        </Popup>
+        <controls:IconTextBlockCustomControl
+            Icon="{StaticResource HuanSiImage}"
+            Spacing="-5"
+            Text="{Binding CurrentUserModel.HuanSi}" />
+    </UniformGrid>
+</base:UserControlBase>

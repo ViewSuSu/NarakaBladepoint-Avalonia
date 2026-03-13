@@ -1,0 +1,50 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.EventCenter.UI.LatestNews.Views.LatestNewsPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.LatestNews.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.EventCenter.UI.LatestNews.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid Margin="50,10">
+            <Grid Margin="0,40,0,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <controls:HighlightBorder Grid.Column="0" Margin="5,0">
+                    <Image Source="{StaticResource LatestNews1Image}" Stretch="UniformToFill" />
+                </controls:HighlightBorder>
+                <Grid Grid.Column="1" Margin="5,0">
+                    <UniformGrid Rows="2">
+                        <controls:HighlightBorder Margin="0,5">
+                            <Image Source="{StaticResource LatestNews2Image}" Stretch="UniformToFill" />
+                        </controls:HighlightBorder>
+
+                        <controls:HighlightBorder Margin="0,5">
+                            <Image Source="{StaticResource LatestNews4Image}" Stretch="UniformToFill" />
+                        </controls:HighlightBorder>
+                    </UniformGrid>
+                </Grid>
+                <Grid Grid.Column="2" Margin="5,0">
+                    <UniformGrid Rows="2">
+                        <controls:HighlightBorder Margin="0,5">
+                            <Image Source="{StaticResource LatestNews3Image}" Stretch="UniformToFill" />
+                        </controls:HighlightBorder>
+
+                        <controls:HighlightBorder Margin="0,5">
+                            <Image Source="{StaticResource LatestNews5Image}" Stretch="UniformToFill" />
+                        </controls:HighlightBorder>
+                    </UniformGrid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</bases:UserControlBase>

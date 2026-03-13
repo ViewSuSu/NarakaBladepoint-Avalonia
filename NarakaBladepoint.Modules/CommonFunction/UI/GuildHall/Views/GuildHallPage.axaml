@@ -1,0 +1,440 @@
+﻿<views:UserControlBase
+    x:Class="NarakaBladepoint.Modules.CommonFunction.UI.GuildHall.Views.GuildHallPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.GuildHall.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.CommonFunction.UI.GuildHall.ViewModels"
+    xmlns:views="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Background2}">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Top Search Bar  -->
+            <Grid Grid.Row="0" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="300" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Search Area  -->
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Height="30"
+                        Padding="8"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="{StaticResource DefaultOrangeBrush}"
+                        Text="聚义厅列表" />
+                    <Image
+                        Name="image1"
+                        Height="20"
+                        Margin="5,0"
+                        Source="{StaticResource GuildHallImageIcon1}" />
+                </StackPanel>
+            </Grid>
+
+            <!--  Main Content  -->
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Left Panel - Guild List with DataGrid in TabItem  -->
+                <TabControl Grid.Column="0" Background="Transparent">
+                    <controls:ImageTextTabItem
+                        Height="40"
+                        FontSize="14"
+                        Foreground="White"
+                        IsSelected="True"
+                        Text="推荐聚义厅">
+                        <DataGrid
+                            Name="datagrid"
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            Foreground="White"
+                            GridLinesVisibility="None"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding RecommendedGuilds}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="等级">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Level}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="聚义厅名称">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="帮主">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Master}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="人数">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding MemberCount}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="限制">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Restriction}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </controls:ImageTextTabItem>
+                    <controls:ImageTextTabItem
+                        Name="tabitem2"
+                        Height="40"
+                        FontSize="14"
+                        Foreground="White"
+                        Text="好友聚义厅">
+                        <DataGrid
+                            Name="datagrid2"
+                            AutoGenerateColumns="False"
+                            ColumnHeaderHeight="30"
+                            Foreground="White"
+                            GridLinesVisibility="None"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding FriendGuilds}"
+                            RowHeight="50">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="80" Header="等级">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Level}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="聚义厅名称">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="帮主">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Master}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="人数">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding MemberCount}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="好友">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding FriendCount}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="*" Header="限制">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="5,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Restriction}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </controls:ImageTextTabItem>
+                </TabControl>
+
+                <!--  Right Panel - Guild Info  -->
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="20,0,0,0"
+                    Orientation="Vertical">
+                    <!--  Guild Header Section  -->
+                    <Grid Height="100" Margin="0,0,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Guild Level Badge  -->
+                        <Border
+                            Name="icon0"
+                            Grid.Column="0"
+                            Width="70"
+                            Height="70"
+                            CornerRadius="5">
+                            <Image Source="{StaticResource GuildHallImage0}" Stretch="UniformToFill" />
+                        </Border>
+
+                        <!--  Guild Info Section  -->
+                        <StackPanel
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="项流AA" />
+                        </StackPanel>
+
+                        <!--  Info Icons  -->
+                        <StackPanel
+                            Grid.Column="2"
+                            Margin="0,0,0,0"
+                            Orientation="Horizontal">
+                            <Image
+                                Name="icon1"
+                                Width="20"
+                                Height="20"
+                                Margin="5,0"
+                                Source="{StaticResource GuildHallImage1}"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Name="icon2"
+                                Width="20"
+                                Height="20"
+                                Source="{StaticResource GuildHallImage2}"
+                                Stretch="UniformToFill" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!--  Divider  -->
+                    <Border
+                        Height="1"
+                        Margin="0,0,0,15"
+                        Background="#3F5A73" />
+
+                    <!--  Guild Master Section  -->
+                    <Grid
+                        Height="60"
+                        Margin="0,0,0,15"
+                        Background="{StaticResource DefaultTransientBlackBackground3}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Master Avatar  -->
+                        <Border
+                            Grid.Column="0"
+                            Width="50"
+                            Height="50"
+                            Background="#4A6FA5"
+                            CornerRadius="5">
+                            <Image
+                                Name="avator"
+                                Source="{Binding GuildMasterAvatar}"
+                                Stretch="UniformToFill" />
+                        </Border>
+
+                        <!--  Master Info  -->
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="15,0,0,0"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="14"
+                                Foreground="White"
+                                Text="晚春" />
+                            <TextBlock
+                                Margin="0,3,0,0"
+                                FontSize="12"
+                                Foreground="#D4A574"
+                                Text="帮主" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!--  Divider  -->
+                    <Border
+                        Height="1"
+                        Margin="0,0,0,15"
+                        Background="#3F5A73" />
+
+                    <!--  Recruitment Announcement Section  -->
+                    <StackPanel Margin="0,0,0,5">
+                        <TextBlock
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="招募宣言" />
+                        <Border
+                            Height="80"
+                            Margin="0,5,0,0"
+                            Background="{StaticResource DefaultTransientBlackBackground3}">
+                            <TextBlock
+                                Margin="5"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontSize="12"
+                                Foreground="#A8B8C8"
+                                Text="暂无招募宣言"
+                                TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
+
+                    <!--  Divider  -->
+                    <Border
+                        Height="1"
+                        Margin="0,0,0,15"
+                        Background="#3F5A73" />
+
+                    <!--  Guild Stats Section  -->
+                    <StackPanel Margin="0,0,0,5">
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="#A8B8C8"
+                            Text="下场群英会时间：未预约" />
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            FontSize="12"
+                            Foreground="#A8B8C8"
+                            Text="本周积分:1104" />
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            FontSize="12"
+                            Foreground="#A8B8C8"
+                            Text="上周积分:14551" />
+                    </StackPanel>
+
+                    <!--  Divider  -->
+                    <Border
+                        Height="1"
+                        Margin="0,0,0,15"
+                        Background="#3F5A73" />
+
+                    <!--  Friends Recommendation Section  -->
+                    <StackPanel>
+                        <StackPanel IsVisible="{Binding IsSelected, ElementName=tabitem2}">
+                            <TextBlock
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Text="您的好友" />
+                            <Border
+                                Height="30"
+                                Margin="0,5,0,0"
+                                Background="{StaticResource DefaultTransientBlackBackground3}"
+                                CornerRadius="5">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Text="拔刀断善转大厅" />
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+
+            <!--  Bottom Buttons  -->
+            <Grid
+                Grid.Row="2"
+                Height="60"
+                Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Button
+                        Grid.Column="1"
+                        Width="160"
+                        Height="40"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Content="创建聚义厅"
+                        FontSize="14"
+                        Foreground="White" />
+                    <Button
+                        Grid.Column="2"
+                        Width="160"
+                        Height="40"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Content="邀请别表"
+                        FontSize="14"
+                        Foreground="White" />
+                </StackPanel>
+                <Button
+                    Grid.Column="3"
+                    Width="160"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="申请加入"
+                    FontSize="14"
+                    Foreground="White" />
+            </Grid>
+
+        </Grid>
+    </Grid>
+</views:UserControlBase>

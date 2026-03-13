@@ -1,0 +1,53 @@
+﻿<base:UserControlBase
+    x:Class="NarakaBladepoint.Modules.Social.UI.Social.Views.SocialPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:base="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.Social.UI.Social.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.Social.UI.Social.ViewModels"
+    d:DesignHeight="100"
+    d:DesignWidth="300"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <UniformGrid Grid.Column="3" Columns="5">
+        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding NavigateToMusicCommand}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Image>
+        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding NavigateToTutorialCommand}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Image>
+        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding NavigateToEmailCommand}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Image>
+        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding NavigateToFrendListCommand}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Image>
+        <Image attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding NavigateToSettingCommand}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Image>
+    </UniformGrid>
+</base:UserControlBase>

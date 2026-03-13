@@ -1,0 +1,19 @@
+<UserControl
+    x:Class="NarakaBladepoint.Controls.HeroAccessibilityDifficultyUserControl"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="root"
+    d:DesignHeight="70"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+
+    <UniformGrid Columns="5">
+        <Image x:Name="Star1" Width="20" Height="20" />
+        <Image x:Name="Star2" Width="20" Height="20" />
+        <Image x:Name="Star3" Width="20" Height="20" />
+        <Image x:Name="Star4" Width="20" Height="20" />
+        <Image x:Name="Star5" Width="20" Height="20" />
+    </UniformGrid>
+</UserControl>

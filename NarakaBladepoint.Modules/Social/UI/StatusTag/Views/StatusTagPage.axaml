@@ -1,0 +1,20 @@
+﻿<bases:UserControlBase
+x:Class="NarakaBladepoint.Modules.Social.UI.StatusTag.Views.StatusTagPage"
+xmlns="https://github.com/avaloniaui"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:local="clr-namespace:NarakaBladepoint.Modules.Social.UI.StatusTag.Views"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.Social.UI.StatusTag.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    mc:Ignorable="d">
+    <Grid>
+        <controls:EscBackControl
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Command="{Binding ReturnCommand}" />
+    </Grid>
+</bases:UserControlBase>

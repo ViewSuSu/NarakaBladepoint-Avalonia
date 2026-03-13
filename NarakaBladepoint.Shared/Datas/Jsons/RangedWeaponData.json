@@ -1,0 +1,79 @@
+﻿[
+  {
+    "Name": "连弩",
+    "Level": 25,
+    "TotalDamage": 384563,
+    "TotalEliminations": 1268,
+    "TotalAssists": 742,
+    "FarthestEliminationDistance": 198,
+    "MaxDamagePerGame": 21985,
+    "MaxEliminationsPerGame": 29,
+    "Headshots": 413
+  },
+  {
+    "Name": "鸟铳",
+    "Level": 25,
+    "TotalDamage": 291430,
+    "TotalEliminations": 942,
+    "TotalAssists": 510,
+    "FarthestEliminationDistance": 237,
+    "MaxDamagePerGame": 18757,
+    "MaxEliminationsPerGame": 24,
+    "Headshots": 358
+  },
+  {
+    "Name": "火炮",
+    "Level": 25,
+    "TotalDamage": 412905,
+    "TotalEliminations": 1105,
+    "TotalAssists": 639,
+    "FarthestEliminationDistance": 172,
+    "MaxDamagePerGame": 26540,
+    "MaxEliminationsPerGame": 31,
+    "Headshots": 121
+  },
+  {
+    "Name": "五眼铳",
+    "Level": 25,
+    "TotalDamage": 268775,
+    "TotalEliminations": 887,
+    "TotalAssists": 496,
+    "FarthestEliminationDistance": 146,
+    "MaxDamagePerGame": 16421,
+    "MaxEliminationsPerGame": 23,
+    "Headshots": 401
+  },
+  {
+    "Name": "弓箭",
+    "Level": 25,
+    "TotalDamage": 355121,
+    "TotalEliminations": 1022,
+    "TotalAssists": 588,
+    "FarthestEliminationDistance": 290,
+    "MaxDamagePerGame": 21018,
+    "MaxEliminationsPerGame": 27,
+    "Headshots": 512
+  },
+  {
+    "Name": "一窝蜂",
+    "Level": 9,
+    "TotalDamage": 98641,
+    "TotalEliminations": 312,
+    "TotalAssists": 205,
+    "FarthestEliminationDistance": 121,
+    "MaxDamagePerGame": 8420,
+    "MaxEliminationsPerGame": 14,
+    "Headshots": 37
+  },
+  {
+    "Name": "喷火筒",
+    "Level": 18,
+    "TotalDamage": 176540,
+    "TotalEliminations": 564,
+    "TotalAssists": 361,
+    "FarthestEliminationDistance": 64,
+    "MaxDamagePerGame": 12341,
+    "MaxEliminationsPerGame": 19,
+    "Headshots": 9
+  }
+]

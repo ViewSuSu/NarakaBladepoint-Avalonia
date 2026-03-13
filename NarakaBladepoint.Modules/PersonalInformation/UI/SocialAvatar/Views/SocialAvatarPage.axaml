@@ -1,0 +1,342 @@
+﻿<bases:UserControlBase
+    x:Class="NarakaBladepoint.Modules.PersonalInformation.UI.SocialAvatar.Views.SocialAvatarPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:NarakaBladepoint.Framework.UI.AttachedProperties;assembly=NarakaBladepoint.Framework"
+    xmlns:bases="clr-namespace:NarakaBladepoint.Framework.Core.Bases.Views;assembly=NarakaBladepoint.Framework"
+    xmlns:controls="clr-namespace:NarakaBladepoint.Controls;assembly=NarakaBladepoint.Controls"
+    xmlns:converters="clr-namespace:NarakaBladepoint.Framework.UI.Converters;assembly=NarakaBladepoint.Framework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.SocialAvatar.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:NarakaBladepoint.Modules.PersonalInformation.UI.SocialAvatar.ViewModels"
+    d:DesignHeight="720"
+    d:DesignWidth="1280"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BoolToTransparentBrushConverter x:Key="BoolToTransparentBrushConverter" />
+    </UserControl.Resources>
+    <Grid Margin="50,80,50,50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Background="Transparent" BorderThickness="0">
+            <controls:IconTabItem
+                Width="70"
+                Header="全部"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon1.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding AllAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem
+                Width="70"
+                Header="英雄"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon2.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding HeroAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem
+                Width="70"
+                Header="武器"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon3.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding WeaponAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem
+                Width="70"
+                Header="赛季奖励"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon4.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding SeasonRewardAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem
+                Width="70"
+                Header="隐族秘宝"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon5.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding HiddenTreasureAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem
+                Width="70"
+                Header="限时活动"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon6.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding LimitedEventAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem
+                Width="70"
+                Header="其他"
+                Icon="avares://NarakaBladepoint.Resources/Image/Avatar/Icon/Icon7.png">
+                <ItemsControl
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding OtherAvatarModels, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemHeight="100" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:HighlightBorder Margin="5">
+                                <Border BorderBrush="{Binding IsSelected, Converter={StaticResource BoolToTransparentBrushConverter}}" BorderThickness="2">
+                                    <i:Interaction.Behaviors>
+                                        <ia:EventTriggerBehavior EventName="PointerPressed">
+                                            <ia:InvokeCommandAction Command="{Binding DataContext.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                        </ia:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <Grid>
+                                        <Image
+                                            attach:HoverHighlightAttachedProperty.EnableHoverHighlight="True"
+                                            Source="{Binding ImageSource, Mode=OneWay}"
+                                            Stretch="Uniform" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            IsVisible="{Binding IsHave, Mode=OneWay}" />
+                                    </Grid>
+                                </Border>
+                            </controls:HighlightBorder>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </controls:IconTabItem>
+            <controls:IconTabItem Width="70" IsVisible="False" />
+        </TabControl>
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,30,30,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Foreground="White"
+            Text="152/429" />
+        <Grid Grid.Column="1" Margin="20,50,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <Image
+                    Width="240"
+                    Height="240"
+                    Margin="0,50,0,0"
+                    Source="avares://NarakaBladepoint.Resources/Image/Avatar/1.png" />
+                <TextBlock
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    FontSize="25"
+                    Foreground="White"
+                    Text="侠风·三排·无相龙王" />
+                <TextBlock
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    Text="侠风赛季中三排达到无相龙王段位的奖励" />
+            </StackPanel>
+            <Button
+                Grid.Row="1"
+                Height="30"
+                VerticalAlignment="Center"
+                Content="更换头像" />
+        </Grid>
+    </Grid>
+</bases:UserControlBase>
