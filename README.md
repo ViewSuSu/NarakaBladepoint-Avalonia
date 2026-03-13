@@ -1,31 +1,27 @@
-![.NET 6](https://img.shields.io/badge/.NET%206-Windows%20Desktop-purple)
-![Platform](https://img.shields.io/badge/Platform-WPF-orange)
+![.NET 8](https://img.shields.io/badge/.NET%208-Cross%20Platform-purple)
+![Platform](https://img.shields.io/badge/Platform-Avalonia-blue)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 [English](README-en.md) | [简体中文](README.md)
 
 **仓库：**
-- 🌐 [GitHub](https://github.com/ViewSuSu/NarakaBladepoint-WPF)
-- 🌐 [Gitee](https://gitee.com/SususuChang/NarakaBladepoint-WPF)
-- 🎬 [项目介绍视频](https://www.bilibili.com/video/BV1jnPMz1E4a/?spm_id_from=333.1387.homepage.video_card.click)
+- 🌐 [GitHub](https://github.com/ViewSuSu/NarakaBladepoint-Avalonia)
 
-> **说明：** 仓库已经完成双向镜像同步，欢迎提PR！
-
-[下载最新安装包](https://github.com/ViewSuSu/NarakaBladepoint-WPF/releases/latest/download/NarakaBladepoint-WPF.exe)
+> **说明：** 欢迎提PR！
 
 > [!TIP]
-> 运行失败请确保已安装 [.NET 6.0 SDK](https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0) 或更高版本。
+> 运行失败请确保已安装 [.NET 8.0 SDK](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0) 或更高版本。
 
 
 
-# 永劫无间客户端 (WPF)
+# 永劫无间客户端 (Avalonia)
 
 
 ## 关于这个项目
 
--  玩了2000个小时的永劫了，最近才发现它整个客户端UX/UI设计得非常优雅（大厂的产品经理还是牛逼），所以想试试用 WPF 还原出U3D的感觉
--  .NET 6、Prism、所有自定义控件纯手撸、没用第三方 UI 库
--  经过精心设计，严格遵循 MVVM 模式，符合 WPF 工程规范，代码结构优雅
+-  在 [WPF 版本](https://github.com/ViewSuSu/NarakaBladepoint-WPF) 基础上，用 Avalonia 重写的跨平台版本，支持 Windows、macOS、Linux
+-  .NET 8、Prism、Avalonia 11.1.0、所有自定义控件纯手撸、没用第三方 UI 库
+-  经过精心设计，严格遵循 MVVM 模式，符合 Avalonia 工程规范，代码结构优雅
 
 <div align="center">
   <img src="./docs/MainWindows.png" alt="主窗口" width="100%" />
@@ -38,6 +34,7 @@
 - **游戏级界面怎么做** - 复杂的布局、动画、交互效果，都是实际碰到并解决的问题
 - **Prism 模块化实践** - 怎么把一个大项目拆成模块，各自独立又能协作
 - **从零开始写控件** - 没用第三方库，所有自定义控件都是手撸的，能看到很多细节
+- **Avalonia 跨平台开发** - 同一套代码同时支持 Windows、macOS、Linux
 - **数据绑定的技巧** - MVVM 模式下怎么优雅地处理数据流
 - **性能优化** - 界面复杂了之后会遇到的性能问题和解决方案
 - **项目架构设计** - 依赖注入、基类设计、模块解耦这些在实际项目里怎么用
@@ -125,6 +122,18 @@
       <em>武器列表</em>
     </td>
   </tr>
+  <tr>
+    <td align="center" width="33.33%">
+      <img src="./docs/SkillPoint.png" alt="Skill Point Interface" width="100%" /><br/>
+      <em>技能点</em>
+    </td>
+    <td align="center" width="33.33%">
+      <img src="./docs/Store.png" alt="Store Interface" width="100%" /><br/>
+      <em>商店</em>
+    </td>
+    <td align="center" width="33.33%">
+    </td>
+  </tr>
 </table>
 
 
@@ -165,11 +174,12 @@ graph LR
 
 ## 如何调试
 
- **Windows 10+** 和 **.NET 6 SDK**（或者更高版本）。
+ **Windows / macOS / Linux** 和 **.NET 8 SDK**（或者更高版本）。
 
- Visual Studio 2022及以上打开解决方案，直接运行 `NarakaBladepoint.App` 项目就行。
+ Visual Studio 2022 或 JetBrains Rider 打开解决方案，直接运行 `NarakaBladepoint.App` 项目就行。
 
 ## 第三方库
+- Avalonia 11.1.0
+- Prism.DryIoc.Avalonia 8.1.97.11073
 - Mapster 7.4.0
 - Newtonsoft.Json 13.0.4
-- Prism.DryIoc 8.1.97

@@ -1,33 +1,27 @@
-![.NET 6](https://img.shields.io/badge/.NET%206-Windows%20Desktop-purple)
-![Platform](https://img.shields.io/badge/Platform-WPF-orange)
+![.NET 8](https://img.shields.io/badge/.NET%208-Cross%20Platform-purple)
+![Platform](https://img.shields.io/badge/Platform-Avalonia-blue)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 [English](README-en.md) | [简体中文](README.md)
 
 **Repository:**
-- 🌐 [GitHub](https://github.com/ViewSuSu/NarakaBladepoint-WPF)
-- 🌐 [Gitee](https://gitee.com/SususuChang/NarakaBladepoint-WPF)
-- 🎬 [Project Introduction Video](https://www.bilibili.com/video/BV1jnPMz1E4a/?spm_id_from=333.1387.homepage.video_card.click)
+- 🌐 [GitHub](https://github.com/ViewSuSu/NarakaBladepoint-Avalonia)
 
-> **Note:** Both repositories are synchronized bidirectionally. Pull requests are welcome!
-
-[Download Latest Installer](https://github.com/ViewSuSu/NarakaBladepoint-WPF/releases/latest/download/NarakaBladepoint-WPF.exe)
+> **Note:** Pull requests are welcome!
 
 > [!TIP]
-> If it fails to run, ensure [.NET 6.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) or later is installed.
+> If it fails to run, ensure [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or later is installed.
 
 
 
-# Naraka Bladepoint Client (WPF)
+# Naraka Bladepoint Client (Avalonia)
 
 
 ## About This Project
 
-- **Motivation** - Played 2000+ hours of Naraka Bladepoint and recently realized how brilliantly designed the client's UX/UI is (props to the big-name product managers!), so I wanted to try recreating that Unity feel with WPF
-- **Tech Stack** - .NET 6, Prism, all custom controls, no third-party UI libs
-- **Architecture** - Meticulously designed, following strict MVVM patterns and WPF best practices, elegant code structure
-- **AI** - Later discovered VibeCoding was amazing for bulk code generation - total game changer!
-- **Code Quality** - Project is half human, half AI-assisted
+- **Origin** - Cross-platform rewrite of the [WPF version](https://github.com/ViewSuSu/NarakaBladepoint-WPF) using Avalonia, supporting Windows, macOS, and Linux
+- **Tech Stack** - .NET 8, Prism, Avalonia 11.1.0, all custom controls, no third-party UI libs
+- **Architecture** - Meticulously designed, following strict MVVM patterns and Avalonia best practices, elegant code structure
 
 <div align="center">
   <img src="./docs/MainWindows.png" alt="主窗口" width="100%" />
@@ -37,11 +31,12 @@
 
 ## What You Can Learn From This
 
-If you're working with WPF, this project might be useful:
+If you're working with Avalonia, this project might be useful:
 
 - **Game-level UI implementation** - Complex layouts, animations, interactions - all the real problems and solutions
 - **Prism in practice** - How to split a large project into modules that work independently yet together
 - **Building controls from scratch** - No third-party libraries, all custom controls written by hand, you can see all the details
+- **Avalonia cross-platform development** - Same codebase running on Windows, macOS, and Linux
 - **Data binding tricks** - How to handle data flow elegantly in MVVM
 - **Performance optimization** - Performance issues you'll face with complex UIs and how to solve them
 - **Project architecture** - How dependency injection, base class design, and module decoupling actually work in real projects
@@ -131,6 +126,18 @@ Some parts could be better - feel free to open issues or PRs.
       <em>Weapon</em>
     </td>
   </tr>
+  <tr>
+    <td align="center" width="33.33%">
+      <img src="./docs/SkillPoint.png" alt="Skill Point" width="100%" /><br/>
+      <em>Skill Point</em>
+    </td>
+    <td align="center" width="33.33%">
+      <img src="./docs/Store.png" alt="Store" width="100%" /><br/>
+      <em>Store</em>
+    </td>
+    <td align="center" width="33.33%">
+    </td>
+  </tr>
 </table>
 
 
@@ -171,12 +178,13 @@ graph LR
 
 ## How to Run
 
-You'll need **Windows 10+** and **.NET 6 SDK** (or later).
+You'll need **Windows / macOS / Linux** and **.NET 8 SDK** (or later).
 
-Open the solution in Visual Studio 2022 and just run the `NarakaBladepoint.App` project.
+Open the solution in Visual Studio 2022 or JetBrains Rider and just run the `NarakaBladepoint.App` project.
 
 ## Dependencies
 
+- Avalonia 11.1.0
+- Prism.DryIoc.Avalonia 8.1.97.11073
 - Mapster 7.4.0
 - Newtonsoft.Json 13.0.4
-- Prism.DryIoc 8.1.97
